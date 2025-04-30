@@ -1,0 +1,19 @@
+  trgw-2-8-29  head  3 9 30  
+ # trgw-2-11-26  HEAD  3 12 27
+  trgw-2-29-5  head  3 30 6
+  trgw-2-41-32  head  3 42 33
+  trgw-2-68-47  head  3 69 48  
+ # trgw-2-47-50  HEAD  3 48 51
+  trgw-2-80-20  head  3 81 21  
+ # trgw-2-65-32  HEAD  3 66 33
+  trgw-2-89-47  head  3 90 48
+  trgw-0-8-29  head  1 9 30  
+ # trgw-2-74-14  HEAD  3 75 15
+  trgw-0-29-5  head  1 30 6
+  trgw-0-41-32  head  1 42 33
+  trgw-0-68-47  head  1 69 48  
+ # trgw-2-101-23  HEAD  3 102 24
+  trgw-0-80-20  head  1 81 21  
+ # trgw-2-104-32  HEAD  3 105 33
+  trgw-0-89-47  head  1 90 48  
+ # trgw-0-8-47  HEAD  1 9 48

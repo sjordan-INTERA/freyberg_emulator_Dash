@@ -1,0 +1,26 @@
+pcf version=2
+* control data keyword
+pestmode                                 estimation
+noptmax                                -1
+svdmode                                 1
+maxsing                          10000000
+eigthresh                           1e-06
+eigwrite                                1
+ies_parameter_ensemble         dv_ens.csv
+ies_save_binary                True
+overdue_giveup_fac             1e+30
+overdue_giveup_minutes         1e+30
+ies_add_base                   False
+ies_no_noise                   True
+* parameter groups external
+freyberg.pargp_data.csv
+* parameter data external
+freyberg.par_data.csv
+* observation data external
+freyberg.obs_data.csv
+* model command line
+python forward_run.py
+* model input external
+freyberg.tplfile_data.csv
+* model output external
+freyberg.insfile_data.csv

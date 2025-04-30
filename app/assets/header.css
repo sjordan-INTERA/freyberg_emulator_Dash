@@ -1,0 +1,24 @@
+.app-header {
+    height: 45px;
+    line-height: 45px;
+    padding: 1px;
+    border-bottom: thick #476943 solid;
+    border-top: thick  #476943 solid;
+    display: flex;
+    background-color:#476943;
+}
+
+.app-header .app-header--title {
+    font-size: 250%;
+    color: #F2F2F2;
+    text-align: center;
+    display: inline-block;
+    margin-left: 30px;
+
+}
+
+body {
+  background-color: #F2F2F2;
+  margin: 0;
+  padding: 0;
+}

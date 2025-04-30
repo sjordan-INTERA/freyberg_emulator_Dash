@@ -1,0 +1,4 @@
+pargpnme,inctyp,derinc,derinclb,forcen,derincmul,dermthd,splitthresh,splitreldiff,splitaction
+welrate,absolute,10.0,0.0,switch,2.0,parabolic,1e-05,0.5,smaller
+sfrinflow,absolute,30.0,0.0,switch,2.0,parabolic,1e-05,0.5,smaller
+rch,absolute,1e-05,0.0,switch,2.0,parabolic,1e-05,0.5,smaller

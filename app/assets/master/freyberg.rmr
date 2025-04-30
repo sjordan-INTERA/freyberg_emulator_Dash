@@ -1,0 +1,136 @@
+
+PANTHER master listening on socket:0.0.0.0:4099 (IPv4)
+running model 30 times
+11/13/24 11:48:45->waiting for agents to appear
+
+11/13/24 11:49:07->new connection from:LAX-26LN224.intera.com:63523
+11/13/24 11:49:07->initializing new agent connection from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_0 socket:LAX-26LN224.intera.com:63523 number of agents:1
+11/13/24 11:49:09->new connection from:LAX-26LN224.intera.com:63525
+11/13/24 11:49:09->initializing new agent connection from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_1 socket:LAX-26LN224.intera.com:63525 number of agents:2
+11/13/24 11:49:10->new agent ready:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_0 socket:LAX-26LN224.intera.com:63523
+11/13/24 11:49:10->Sending run_id:0 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_0 group_id:2  da_cycle:-9999   realization:0 concurrent:1)
+11/13/24 11:49:11->new connection from:LAX-26LN224.intera.com:63529
+11/13/24 11:49:11->initializing new agent connection from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_2 socket:LAX-26LN224.intera.com:63529 number of agents:3
+11/13/24 11:49:12->new agent ready:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_1 socket:LAX-26LN224.intera.com:63525
+11/13/24 11:49:12->Sending run_id:1 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_1 group_id:2  da_cycle:-9999   realization:1 concurrent:1)
+11/13/24 11:49:13->new connection from:LAX-26LN224.intera.com:63533
+11/13/24 11:49:13->initializing new agent connection from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_3 socket:LAX-26LN224.intera.com:63533 number of agents:4
+11/13/24 11:49:13->new agent ready:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_2 socket:LAX-26LN224.intera.com:63529
+11/13/24 11:49:13->Sending run_id:2 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_2 group_id:2  da_cycle:-9999   realization:2 concurrent:1)
+11/13/24 11:49:14->new agent ready:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_3 socket:LAX-26LN224.intera.com:63533
+11/13/24 11:49:14->Sending run_id:3 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_3 group_id:2  da_cycle:-9999   realization:3 concurrent:1)
+11/13/24 11:49:15->new connection from:LAX-26LN224.intera.com:63538
+11/13/24 11:49:15->initializing new agent connection from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_4 socket:LAX-26LN224.intera.com:63538 number of agents:5
+11/13/24 11:49:17->new agent ready:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_4 socket:LAX-26LN224.intera.com:63538
+11/13/24 11:49:17->Sending run_id:4 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_4 group_id:2  da_cycle:-9999   realization:4 concurrent:1)
+11/13/24 11:49:17->new connection from:LAX-26LN224.intera.com:63543
+11/13/24 11:49:17->initializing new agent connection from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_5 socket:LAX-26LN224.intera.com:63543 number of agents:6
+11/13/24 11:49:18->new agent ready:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_5 socket:LAX-26LN224.intera.com:63543
+11/13/24 11:49:18->Sending run_id:5 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_5 group_id:2  da_cycle:-9999   realization:5 concurrent:1)
+11/13/24 11:49:19->new connection from:LAX-26LN224.intera.com:63548
+11/13/24 11:49:19->initializing new agent connection from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_6 socket:LAX-26LN224.intera.com:63548 number of agents:7
+11/13/24 11:49:20->new agent ready:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_6 socket:LAX-26LN224.intera.com:63548
+11/13/24 11:49:20->Sending run_id:6 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_6 group_id:2  da_cycle:-9999   realization:6 concurrent:1)
+11/13/24 11:49:21->new connection from:LAX-26LN224.intera.com:63549
+11/13/24 11:49:21->initializing new agent connection from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_7 socket:LAX-26LN224.intera.com:63549 number of agents:8
+11/13/24 11:49:23->new agent ready:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_7 socket:LAX-26LN224.intera.com:63549
+11/13/24 11:49:23->Sending run_id:7 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_7 group_id:2  da_cycle:-9999   realization:7 concurrent:1)
+11/13/24 11:49:24->new connection from:LAX-26LN224.intera.com:63555
+11/13/24 11:49:24->initializing new agent connection from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_8 socket:LAX-26LN224.intera.com:63555 number of agents:9
+11/13/24 11:49:25->new connection from:LAX-26LN224.intera.com:63567
+11/13/24 11:49:25->initializing new agent connection from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_9 socket:LAX-26LN224.intera.com:63567 number of agents:10
+11/13/24 11:49:26->new agent ready:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_8 socket:LAX-26LN224.intera.com:63555
+11/13/24 11:49:26->Sending run_id:8 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_8 group_id:2  da_cycle:-9999   realization:8 concurrent:1)
+11/13/24 11:49:27->new agent ready:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_9 socket:LAX-26LN224.intera.com:63567
+11/13/24 11:49:27->Sending run_id:9 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_9 group_id:2  da_cycle:-9999   realization:9 concurrent:1)
+11/13/24 11:49:32-> run_id:0 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_0  run_time:0.36105  avg_run_time:0.36105 group_id:2  da_cycle:-9999   realization:0  worker_time:0.358017 concurrent:1
+11/13/24 11:49:32->run 0 processed
+11/13/24 11:49:32->Sending run_id:10 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_0 group_id:2  da_cycle:-9999   realization:10 concurrent:1)
+11/13/24 11:49:34-> run_id:1 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_1  run_time:0.370283  avg_run_time:0.365667 group_id:2  da_cycle:-9999   realization:1  worker_time:0.366967 concurrent:1
+11/13/24 11:49:34->run 1 processed
+11/13/24 11:49:34->Sending run_id:11 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_1 group_id:2  da_cycle:-9999   realization:11 concurrent:1)
+11/13/24 11:49:36-> run_id:2 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_2  run_time:0.38795  avg_run_time:0.373094 group_id:2  da_cycle:-9999   realization:2  worker_time:0.3855 concurrent:1
+11/13/24 11:49:36->run 2 processed
+11/13/24 11:49:36->Sending run_id:12 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_2 group_id:2  da_cycle:-9999   realization:12 concurrent:1)
+11/13/24 11:49:37-> run_id:3 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_3  run_time:0.3891  avg_run_time:0.377096 group_id:2  da_cycle:-9999   realization:3  worker_time:0.3855 concurrent:1
+11/13/24 11:49:37->run 3 processed
+11/13/24 11:49:37->Sending run_id:13 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_3 group_id:2  da_cycle:-9999   realization:13 concurrent:1)
+11/13/24 11:49:40-> run_id:4 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_4  run_time:0.389833  avg_run_time:0.379643 group_id:2  da_cycle:-9999   realization:4  worker_time:0.3869 concurrent:1
+11/13/24 11:49:40->run 4 processed
+11/13/24 11:49:40->Sending run_id:14 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_4 group_id:2  da_cycle:-9999   realization:14 concurrent:1)
+11/13/24 11:49:41-> run_id:5 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_5  run_time:0.37895  avg_run_time:0.379528 group_id:2  da_cycle:-9999   realization:5  worker_time:0.37595 concurrent:1
+11/13/24 11:49:41->run 5 processed
+11/13/24 11:49:41->Sending run_id:15 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_5 group_id:2  da_cycle:-9999   realization:15 concurrent:1)
+11/13/24 11:49:46-> run_id:6 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_6  run_time:0.432883  avg_run_time:0.38715 group_id:2  da_cycle:-9999   realization:6  worker_time:0.429683 concurrent:1
+11/13/24 11:49:46->run 6 processed
+11/13/24 11:49:46->Sending run_id:16 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_6 group_id:2  da_cycle:-9999   realization:16 concurrent:1)
+11/13/24 11:49:49-> run_id:7 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_7  run_time:0.427583  avg_run_time:0.392204 group_id:2  da_cycle:-9999   realization:7  worker_time:0.424417 concurrent:1
+11/13/24 11:49:49->run 7 processed
+11/13/24 11:49:49->Sending run_id:17 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_7 group_id:2  da_cycle:-9999   realization:17 concurrent:1)
+11/13/24 11:49:50-> run_id:9 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_9  run_time:0.37225  avg_run_time:0.389987 group_id:2  da_cycle:-9999   realization:9  worker_time:0.3695 concurrent:1
+11/13/24 11:49:50->run 9 processed
+11/13/24 11:49:50->Sending run_id:18 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_9 group_id:2  da_cycle:-9999   realization:18 concurrent:1)
+11/13/24 11:49:50-> run_id:8 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_8  run_time:0.402067  avg_run_time:0.391195 group_id:2  da_cycle:-9999   realization:8  worker_time:0.398933 concurrent:1
+11/13/24 11:49:50->run 8 processed
+11/13/24 11:49:50->Sending run_id:19 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_8 group_id:2  da_cycle:-9999   realization:19 concurrent:1)
+11/13/24 11:49:52-> run_id:10 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_0  run_time:0.34585  avg_run_time:0.389675 group_id:2  da_cycle:-9999   realization:10  worker_time:0.32935 concurrent:1
+11/13/24 11:49:52->run 10 processed
+11/13/24 11:49:52->Sending run_id:20 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_0 group_id:2  da_cycle:-9999   realization:20 concurrent:1)
+11/13/24 11:49:56-> run_id:11 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_1  run_time:0.364167  avg_run_time:0.389063 group_id:2  da_cycle:-9999   realization:11  worker_time:0.35675 concurrent:1
+11/13/24 11:49:56->run 11 processed
+11/13/24 11:49:56->Sending run_id:21 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_1 group_id:2  da_cycle:-9999   realization:21 concurrent:1)
+11/13/24 11:49:59-> run_id:12 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_2  run_time:0.378483  avg_run_time:0.388117 group_id:2  da_cycle:-9999   realization:12  worker_time:0.367733 concurrent:1
+11/13/24 11:49:59->run 12 processed
+11/13/24 11:49:59->Sending run_id:22 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_2 group_id:2  da_cycle:-9999   realization:22 concurrent:1)
+11/13/24 11:50:02-> run_id:13 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_3  run_time:0.396767  avg_run_time:0.388883 group_id:2  da_cycle:-9999   realization:13  worker_time:0.402233 concurrent:1
+11/13/24 11:50:02->run 13 processed
+11/13/24 11:50:02->Sending run_id:23 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_3 group_id:2  da_cycle:-9999   realization:23 concurrent:1)
+11/13/24 11:50:04-> run_id:15 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_5  run_time:0.375933  avg_run_time:0.388582 group_id:2  da_cycle:-9999   realization:15  worker_time:0.37085 concurrent:1
+11/13/24 11:50:04->run 15 processed
+11/13/24 11:50:04->Sending run_id:24 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_5 group_id:2  da_cycle:-9999   realization:24 concurrent:1)
+11/13/24 11:50:05-> run_id:14 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_4  run_time:0.3974  avg_run_time:0.389338 group_id:2  da_cycle:-9999   realization:14  worker_time:0.403533 concurrent:1
+11/13/24 11:50:05->run 14 processed
+11/13/24 11:50:05->Sending run_id:25 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_4 group_id:2  da_cycle:-9999   realization:25 concurrent:1)
+11/13/24 11:50:13-> run_id:16 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_6  run_time:0.43905  avg_run_time:0.389955 group_id:2  da_cycle:-9999   realization:16  worker_time:0.443567 concurrent:1
+11/13/24 11:50:13->run 16 processed
+11/13/24 11:50:13->Sending run_id:26 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_6 group_id:2  da_cycle:-9999   realization:26 concurrent:1)
+11/13/24 11:50:17-> run_id:17 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_7  run_time:0.445  avg_run_time:0.391697 group_id:2  da_cycle:-9999   realization:17  worker_time:0.460483 concurrent:1
+11/13/24 11:50:17->run 17 processed
+11/13/24 11:50:17->Sending run_id:27 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_7 group_id:2  da_cycle:-9999   realization:27 concurrent:1)
+11/13/24 11:50:18-> run_id:19 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_8  run_time:0.429167  avg_run_time:0.394407 group_id:2  da_cycle:-9999   realization:19  worker_time:0.454833 concurrent:1
+11/13/24 11:50:18->run 19 processed
+11/13/24 11:50:18->Sending run_id:28 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_8 group_id:2  da_cycle:-9999   realization:28 concurrent:1)
+11/13/24 11:50:22-> run_id:20 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_0  run_time:0.422383  avg_run_time:0.40206 group_id:2  da_cycle:-9999   realization:20  worker_time:0.497117 concurrent:1
+11/13/24 11:50:22->run 20 processed
+11/13/24 11:50:22->Sending run_id:29 to:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_0 group_id:2  da_cycle:-9999   realization:29 concurrent:1)
+11/13/24 11:50:23-> run_id:18 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_9  run_time:0.460033  avg_run_time:0.410838 group_id:2  da_cycle:-9999   realization:18  worker_time:0.5465 concurrent:1
+11/13/24 11:50:23->run 18 processed
+11/13/24 11:50:24-> run_id:21 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_1  run_time:0.4157  avg_run_time:0.415992 group_id:2  da_cycle:-9999   realization:21  worker_time:0.466017 concurrent:1
+11/13/24 11:50:24->run 21 processed
+11/13/24 11:50:26-> run_id:22 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_2  run_time:0.412917  avg_run_time:0.419435 group_id:2  da_cycle:-9999   realization:22  worker_time:0.445783 concurrent:1
+11/13/24 11:50:26->run 22 processed
+11/13/24 11:50:28-> run_id:23 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_3  run_time:0.41555  avg_run_time:0.421313 group_id:2  da_cycle:-9999   realization:23  worker_time:0.4332 concurrent:1
+11/13/24 11:50:28->run 23 processed
+11/13/24 11:50:28-> run_id:25 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_4  run_time:0.39365  avg_run_time:0.420938 group_id:2  da_cycle:-9999   realization:25  worker_time:0.38825 concurrent:1
+11/13/24 11:50:29->run 25 processed
+11/13/24 11:50:29-> run_id:24 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_5  run_time:0.39835  avg_run_time:0.42318 group_id:2  da_cycle:-9999   realization:24  worker_time:0.419317 concurrent:1
+11/13/24 11:50:29->run 24 processed
+11/13/24 11:50:34-> run_id:26 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_6  run_time:0.39215  avg_run_time:0.41849 group_id:2  da_cycle:-9999   realization:26  worker_time:0.343883 concurrent:1
+11/13/24 11:50:34->run 26 processed
+11/13/24 11:50:36-> run_id:27 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_7  run_time:0.3789  avg_run_time:0.41188 group_id:2  da_cycle:-9999   realization:27  worker_time:0.311417 concurrent:1
+11/13/24 11:50:36->run 27 processed
+11/13/24 11:50:40-> run_id:29 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_0  run_time:0.358583  avg_run_time:0.4055 group_id:2  da_cycle:-9999   realization:29  worker_time:0.293217 concurrent:1
+11/13/24 11:50:40->run 29 processed
+11/13/24 11:50:47-> run_id:28 received from:LAX-26LN224.intera.com$C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\worker_8  run_time:0.459617  avg_run_time:0.408545 group_id:2  da_cycle:-9999   realization:28  worker_time:0.489317 concurrent:1
+11/13/24 11:50:48->run 28 processed
+
+---------------------
+   30 runs complete :  0 runs failed
+   0.409 avg run time (min) : 2.09 run mgr time (min)
+   10 agents connected
+
+
+
+11/13/24 11:50:51->Started idle ping thread.
+11/13/24 11:50:51->Panther idle ping thread resumed.
+11/13/24 11:50:58->Stopped idle ping thread, as Panther manager is shutting down.

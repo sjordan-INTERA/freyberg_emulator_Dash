@@ -1,0 +1,707 @@
+             pestpp-ies - a GLM iterative Ensemble Smoother
+                      for PEST(++) datasets 
+
+                 by the PEST++ developement team
+
+
+
+
+
+version: 5.2.7
+binary compiled on Sep  4 2023 at 12:54:53
+
+using control file: "freyberg.pst"
+in directory: "C:\Users\shjordan\Documents\Projects\Santa_Clarita_GW_Model\freyberg-rmemul\master"
+on host: "LAX-26LN224"
+started at 11/13/24 11:48:39
+
+...reading external file 'freyberg.pargp_data.csv'
+...header line: PARGPNME,INCTYP,DERINC,DERINCLB,FORCEN,DERINCMUL,DERMTHD,SPLITTHRESH,SPLITRELDIFF,SPLITACTION
+...read 4 lines from external file
+...reading external file 'freyberg.par_data.csv'
+...header line: PARNME,PARTRANS,PARCHGLIM,PARVAL1,PARLBND,PARUBND,PARGP,SCALE,OFFSET,DERCOM,IDX0,IDX1,INST,PNAME,PSTYLE,PTYPE,USECOL
+...read 154 lines from external file
+...reading external file 'freyberg.obs_data.csv'
+...header line: OBSNME,OBSVAL,WEIGHT,OBGNME,I,J,KPER,KSTP,ONAME,OTYPE,TIME,TOTIM,USECOL,ZONE
+...read 361501 lines from external file
+...reading external file 'freyberg.tplfile_data.csv'
+...header line: PEST_FILE,MODEL_FILE
+...read 28 lines from external file
+...reading external file 'freyberg.insfile_data.csv'
+...header line: PEST_FILE,MODEL_FILE
+...read 55 lines from external file
+observation warning: no non-zero weighted observations
+
+    This software has been approved for release by the
+    U.S.Geological Survey(USGS).Although the software has 
+    been subjected to rigorous review, the USGS reserves the
+    right to update the software as needed pursuant to further
+    analysisand review.No warranty, expressed or implied, is 
+    made by the USGS or the U.S.Government as to the
+    functionality of the softwareand related material nor shall
+    the fact of release constitute any such warranty.
+    Furthermore, the software is released on condition that
+    neither the USGS nor the U.S.Government shall be held
+    liable for any damages resulting from its authorized 
+    or unauthorized use.
+
+
+Case dimensions:- 
+    Number of parameters = 153
+    Number of adjustable parameters = 153
+    Number of observations = 361500
+    Number of non-zero weighted observations = 0
+    Number of prior estimates = 0
+
+PEST Control Information
+    relparmax = 1
+    facparmax = 1.1
+    facorig = 0.001
+    phiredswh = 0.1
+    noptmax = -1
+    phiredstp = 0.01
+    nphistp = 3
+    nphinored = 3
+    relparstp = 0.01
+    nrelpar = 3
+
+
+    PEST++ OPTIONS: 
+
+...general options (used in multiple tools): 
+svd_pack: redsvd
+lambda_scale_fac: 0.75,1,1.1,
+forgive_unknown_args: 0
+max_run_fail: 3
+panther_poll_interval: 1
+parameter_covariance: 
+observation_covariance: 
+hotstart_resfile: 
+overdue_resched_fac: 1.15
+overdue_giveup_fac: 1e+30
+overdue_giveup_minutes: 1e+30
+condor_submit_file: 
+tie_by_group: 0
+par_sigma_range: 4
+enforce_tied_bounds: 0
+debug_parse_only: 0
+check_tplins: 1
+fill_tpl_zeros: 0
+tpl_force_decimal: 0
+additional_ins_delimiters: 
+random_seed: 358183147
+num_tpl_ins_threads: 1
+save_binary: 1
+ensemble_output_precision: 6
+panther_echo: 1
+panther_agent_restart_on_error: 0
+panther_agent_no_ping_timeout_secs: -1
+panther_debug_loop: 0
+debug_check_par_en_consistency: 0
+panther_agent_freeze_on_fail: 0
+panther_transfer_on_finish: 
+panther_transfer_on_fail: 
+
+...pestpp-glm specific options:
+max_n_super: 1000000
+super_eigthresh: 1e-06
+n_iter_base: 1000000
+n_iter_super: 0
+super_relparmax: 0.1
+max_super_frz_iter: 20
+max_reg_iter: 20
+lambdas: 0.1,1,10,100,1000,
+iteration_summary: 0
+der_forgive: 1
+uncertainty: 1
+forecasts: 
+base_jacobian: 
+glm_num_reals: 0
+jac_scale: 1
+glm_normal_form: DIAG
+glm_debug_der_fail: 0
+glm_debug_lamb_fail: 0
+glm_debug_real_fail: 0
+glm_accept_mc_phi: 0
+glm_rebase_super: 0
+glm_iter_mc: 0
+glm_high_2nd_iter_phi: 0
+
+...pestpp-swp options:
+sweep_parameter_csv_file: 
+sweep_output_csv_file: sweep_out.csv
+sweep_chunk: 500
+sweep_forgive: 0
+sweep_base_run: 0
+sweep_include_regul_phi: 0
+
+...pestpp-opt options:
+opt_objective_function: 
+opt_coin_log: 1
+opt_skip_final: 0
+opt_std_weights: 0
+opt_stack_size: 0
+opt_par_stack: 
+opt_obs_stack: 
+opt_decision_variable_groups: 
+opt_external_variable_groups: 
+opt_constraint_groups: 
+opt_risk: 0.5
+opt_iter_derinc_fac: 1
+opt_direction: 1
+opt_iter_tol: 0.001
+opt_recalc_fosm_every: 1
+opt_chance_points: SINGLE
+
+...pestpp-sqp options:
+sqp_dv_en: 
+sqp_obs_restart_en: 
+sqp_num_reals: -1
+sqp_update_hessian: 0
+sqp_scale_facs:
+  1e-05
+  0.0001
+  0.0005
+  0.001
+  0.0025
+  0.005
+  0.01
+  0.05
+  0.075
+  0.1
+  0.25
+  0.5
+  1
+  2
+  5
+  10
+
+...pestpp-mou options:
+mou_generator: PSO
+mou_population_size: 100
+mou_dv_population_file: 
+mou_obs_population_restart_file: 
+mou_objectives: 
+mou_max_archive_size: 500
+mou_risk_objective: 0
+mou_verbose_level: 1
+mou_env_selector: NSGA
+mou_mating_selector: TOURNAMENT
+mou_crossover_prob: 0.75
+mou_mutation_prob: -999
+mou_de_f: 0.8
+mou_save_population_every: -1
+mou_pso_omega: 0.7
+mou_pso_social_const: 2
+mou_pso_cognitive: 2
+mou_population_schedule: 
+mou_simplex_reflections:10
+mou_simplex_factors: 
+ 0.5
+ 0.6
+ 0.7
+ 0.8
+mou_simplex_mutation: 0
+mou_use_multigen:0
+mou_shuffle_fixed_pars: 0
+
+...shared pestpp-ies/pestpp-da options:
+(note: 'da' args override 'ies' args when using pestpp-da)
+ies_parameter_ensemble: dv_ens.csv
+ies_observation_ensemble: 
+ies_weights_ensemble: 
+ies_restart_parameter_ensemble: 
+ies_restart_observation_ensemble: 
+ies_use_approximate_solution: 1
+ies_lambda_mults: 0.1,1,10,
+ies_initial_lambda: 0
+ies_use_approx: 1
+ies_subset_size: 4
+ies_reg_factor: 0
+ies_verbose_level: 1
+ies_use_prior_scaling: 0
+ies_num_reals: 50
+ies_bad_phi: 1e+300
+ies_bad_phi_sigma: 1e+300
+ies_include_base: 0
+ies_use_empirical_prior: 0
+ies_group_draws: 1
+ies_enforce_bounds: 1
+ies_localizer: 
+ies_accept_phi_fac: 1.05
+ies_lambda_inc_fac: 10
+ies_lambda_dec_fac: 0.75
+ies_save_lambda_ensembles: 0
+ies_subset_how: RANDOM
+ies_localize_how: PARAMETERS
+ies_num_threads: -1
+ies_debug_fail_subset: 0
+ies_debug_fail_remainder: 0
+ies_debug_bad_phi: 0
+ies_debug_upgrade_only: 0
+ies_debug_high_subset_phi: 0
+ies_debug_high_upgrade_phi: 0
+ies_csv_by_reals: 1
+ies_autoadaloc: 0
+ies_autoadaloc_sigma_dist: 1
+ies_enforce_chglim: 0
+ies_center_on: 
+ies_no_noise: 1
+ies_drop_conflicts: 0
+ies_save_rescov:0
+ies_pdc_sigma_distance: -1
+ies_use_mda: 0
+ies_mda_init_fac: 10
+ies_mda_dec_fac: 0.5
+ies_localization_type: LOCAL
+ies_upgrades_in_memory: 1
+ies_ordered_binary: 1
+ies_multimodal_alpha: 1
+ies_localizer_forgive_extra: 0
+ies_phi_factors_file: 
+ies_phi_factors_by_real: 0
+
+pestpp-sen options: 
+gsa_method: MORRIS
+gsa_morris_pooled_obs: 0
+gsa_morris_obs_sen: 1
+gsa_morris_p: 4
+gsa_morris_r: 4
+gsa_morris_delta: 0.6666
+gsa_sobol_samples: 4
+gsa_sobol_par_dist: norm
+
+pestpp-da options (those not shared with pestpp-ies):
+da_parameter_cycle_table: 
+da_observation_cycle_table: 
+da_hotstart_cycle: 0
+da_stop_cycle: 1000000000
+da_use_simulated_states: 1
+da_noptmax_schedule: 
+
+
+
+Model command line(s):- 
+    python forward_run.py
+
+Model interface files:-
+    template files:
+      freyberg6.wel_stress_period_data_1.txt.tpl
+      freyberg6.wel_stress_period_data_2.txt.tpl
+      freyberg6.wel_stress_period_data_3.txt.tpl
+      freyberg6.wel_stress_period_data_4.txt.tpl
+      freyberg6.wel_stress_period_data_5.txt.tpl
+      freyberg6.wel_stress_period_data_6.txt.tpl
+      freyberg6.wel_stress_period_data_7.txt.tpl
+      freyberg6.wel_stress_period_data_8.txt.tpl
+      freyberg6.wel_stress_period_data_9.txt.tpl
+      freyberg6.wel_stress_period_data_10.txt.tpl
+      freyberg6.wel_stress_period_data_11.txt.tpl
+      freyberg6.wel_stress_period_data_12.txt.tpl
+      freyberg6.wel_stress_period_data_13.txt.tpl
+      freyberg6.wel_stress_period_data_14.txt.tpl
+      freyberg6.wel_stress_period_data_15.txt.tpl
+      freyberg6.wel_stress_period_data_16.txt.tpl
+      freyberg6.wel_stress_period_data_17.txt.tpl
+      freyberg6.wel_stress_period_data_18.txt.tpl
+      freyberg6.wel_stress_period_data_19.txt.tpl
+      freyberg6.wel_stress_period_data_20.txt.tpl
+      freyberg6.wel_stress_period_data_21.txt.tpl
+      freyberg6.wel_stress_period_data_22.txt.tpl
+      freyberg6.wel_stress_period_data_23.txt.tpl
+      freyberg6.wel_stress_period_data_24.txt.tpl
+      freyberg6.wel_stress_period_data_25.txt.tpl
+      freyberg6.sfr_perioddata_1.txt.tpl
+      freyberg6.rcha_recharge_1.txt.tpl
+    model input files:
+      org\freyberg6.wel_stress_period_data_1.txt
+      org\freyberg6.wel_stress_period_data_2.txt
+      org\freyberg6.wel_stress_period_data_3.txt
+      org\freyberg6.wel_stress_period_data_4.txt
+      org\freyberg6.wel_stress_period_data_5.txt
+      org\freyberg6.wel_stress_period_data_6.txt
+      org\freyberg6.wel_stress_period_data_7.txt
+      org\freyberg6.wel_stress_period_data_8.txt
+      org\freyberg6.wel_stress_period_data_9.txt
+      org\freyberg6.wel_stress_period_data_10.txt
+      org\freyberg6.wel_stress_period_data_11.txt
+      org\freyberg6.wel_stress_period_data_12.txt
+      org\freyberg6.wel_stress_period_data_13.txt
+      org\freyberg6.wel_stress_period_data_14.txt
+      org\freyberg6.wel_stress_period_data_15.txt
+      org\freyberg6.wel_stress_period_data_16.txt
+      org\freyberg6.wel_stress_period_data_17.txt
+      org\freyberg6.wel_stress_period_data_18.txt
+      org\freyberg6.wel_stress_period_data_19.txt
+      org\freyberg6.wel_stress_period_data_20.txt
+      org\freyberg6.wel_stress_period_data_21.txt
+      org\freyberg6.wel_stress_period_data_22.txt
+      org\freyberg6.wel_stress_period_data_23.txt
+      org\freyberg6.wel_stress_period_data_24.txt
+      org\freyberg6.wel_stress_period_data_25.txt
+      org\freyberg6.sfr_perioddata_1.txt
+      org\freyberg6.rcha_recharge_1.txt
+
+    instruction files:
+      hds_layer0_kper0.txt.ins
+      hds_layer2_kper0.txt.ins
+      hds_layer0_kper1.txt.ins
+      hds_layer2_kper1.txt.ins
+      hds_layer0_kper2.txt.ins
+      hds_layer2_kper2.txt.ins
+      hds_layer0_kper3.txt.ins
+      hds_layer2_kper3.txt.ins
+      hds_layer0_kper4.txt.ins
+      hds_layer2_kper4.txt.ins
+      hds_layer0_kper5.txt.ins
+      hds_layer2_kper5.txt.ins
+      hds_layer0_kper6.txt.ins
+      hds_layer2_kper6.txt.ins
+      hds_layer0_kper7.txt.ins
+      hds_layer2_kper7.txt.ins
+      hds_layer0_kper8.txt.ins
+      hds_layer2_kper8.txt.ins
+      hds_layer0_kper9.txt.ins
+      hds_layer2_kper9.txt.ins
+      hds_layer0_kper10.txt.ins
+      hds_layer2_kper10.txt.ins
+      hds_layer0_kper11.txt.ins
+      hds_layer2_kper11.txt.ins
+      hds_layer0_kper12.txt.ins
+      hds_layer2_kper12.txt.ins
+      hds_layer0_kper13.txt.ins
+      hds_layer2_kper13.txt.ins
+      hds_layer0_kper14.txt.ins
+      hds_layer2_kper14.txt.ins
+      hds_layer0_kper15.txt.ins
+      hds_layer2_kper15.txt.ins
+      hds_layer0_kper16.txt.ins
+      hds_layer2_kper16.txt.ins
+      hds_layer0_kper17.txt.ins
+      hds_layer2_kper17.txt.ins
+      hds_layer0_kper18.txt.ins
+      hds_layer2_kper18.txt.ins
+      hds_layer0_kper19.txt.ins
+      hds_layer2_kper19.txt.ins
+      hds_layer0_kper20.txt.ins
+      hds_layer2_kper20.txt.ins
+      hds_layer0_kper21.txt.ins
+      hds_layer2_kper21.txt.ins
+      hds_layer0_kper22.txt.ins
+      hds_layer2_kper22.txt.ins
+      hds_layer0_kper23.txt.ins
+      hds_layer2_kper23.txt.ins
+      hds_layer0_kper24.txt.ins
+      hds_layer2_kper24.txt.ins
+      heads.csv.ins
+      sfr.csv.ins
+      zonebud.csv.ins
+      inc.csv.ins
+    model output files:
+      hds_layer0_kper0.txt
+      hds_layer2_kper0.txt
+      hds_layer0_kper1.txt
+      hds_layer2_kper1.txt
+      hds_layer0_kper2.txt
+      hds_layer2_kper2.txt
+      hds_layer0_kper3.txt
+      hds_layer2_kper3.txt
+      hds_layer0_kper4.txt
+      hds_layer2_kper4.txt
+      hds_layer0_kper5.txt
+      hds_layer2_kper5.txt
+      hds_layer0_kper6.txt
+      hds_layer2_kper6.txt
+      hds_layer0_kper7.txt
+      hds_layer2_kper7.txt
+      hds_layer0_kper8.txt
+      hds_layer2_kper8.txt
+      hds_layer0_kper9.txt
+      hds_layer2_kper9.txt
+      hds_layer0_kper10.txt
+      hds_layer2_kper10.txt
+      hds_layer0_kper11.txt
+      hds_layer2_kper11.txt
+      hds_layer0_kper12.txt
+      hds_layer2_kper12.txt
+      hds_layer0_kper13.txt
+      hds_layer2_kper13.txt
+      hds_layer0_kper14.txt
+      hds_layer2_kper14.txt
+      hds_layer0_kper15.txt
+      hds_layer2_kper15.txt
+      hds_layer0_kper16.txt
+      hds_layer2_kper16.txt
+      hds_layer0_kper17.txt
+      hds_layer2_kper17.txt
+      hds_layer0_kper18.txt
+      hds_layer2_kper18.txt
+      hds_layer0_kper19.txt
+      hds_layer2_kper19.txt
+      hds_layer0_kper20.txt
+      hds_layer2_kper20.txt
+      hds_layer0_kper21.txt
+      hds_layer2_kper21.txt
+      hds_layer0_kper22.txt
+      hds_layer2_kper22.txt
+      hds_layer0_kper23.txt
+      hds_layer2_kper23.txt
+      hds_layer0_kper24.txt
+      hds_layer2_kper24.txt
+      heads.csv
+      sfr.csv
+      zonebud.csv
+      inc.csv
+
+
+Parameter group information
+NAME          INCREMENT TYPE     DERIVATIVE INCREMENT    INCREMENT LOWER BOUND  FORCE CENTRAL     INCREMENT MULTIPLIER
+welrate             ABSOLUTE                       10                        0         SWITCH                        2
+sfrinflow           ABSOLUTE                       30                        0         SWITCH                        2
+rch                 ABSOLUTE                    1e-05                        0         SWITCH                        2
+
+
+
+Parameter information
+NAME                                                           TRANSFORMATION        CHANGE LIMIT  INITIAL VALUE    LOWER BOUND    UPPER BOUND        GROUP          SCALE         OFFSET  DERIVATIVE COMMAND
+pname:wel_0_inst:0_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28   none                    FACTOR       -150.068           -500              0      welrate              1              0                   1
+pname:wel_0_inst:0_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34   none                    FACTOR       -150.068           -500              0      welrate              1              0                   1
+pname:wel_0_inst:0_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61   none                    FACTOR       -150.068           -500              0      welrate              1              0                   1
+pname:wel_0_inst:0_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79   none                    FACTOR       -150.068           -500              0      welrate              1              0                   1
+pname:wel_0_inst:0_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88   none                    FACTOR       -150.068           -500              0      welrate              1              0                   1
+pname:wel_0_inst:0_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103  none                    FACTOR       -150.068           -500              0      welrate              1              0                   1
+pname:wel_0_inst:1_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28   none                    FACTOR       -150.091           -500              0      welrate              1              0                   1
+pname:wel_0_inst:1_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34   none                    FACTOR       -150.091           -500              0      welrate              1              0                   1
+pname:wel_0_inst:1_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61   none                    FACTOR       -150.091           -500              0      welrate              1              0                   1
+pname:wel_0_inst:1_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79   none                    FACTOR       -150.091           -500              0      welrate              1              0                   1
+pname:wel_0_inst:1_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88   none                    FACTOR       -150.091           -500              0      welrate              1              0                   1
+pname:wel_0_inst:1_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103  none                    FACTOR       -150.091           -500              0      welrate              1              0                   1
+pname:wel_0_inst:2_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28   none                    FACTOR       -150.082           -500              0      welrate              1              0                   1
+pname:wel_0_inst:2_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34   none                    FACTOR       -150.082           -500              0      welrate              1              0                   1
+pname:wel_0_inst:2_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61   none                    FACTOR       -150.082           -500              0      welrate              1              0                   1
+pname:wel_0_inst:2_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79   none                    FACTOR       -150.082           -500              0      welrate              1              0                   1
+pname:wel_0_inst:2_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88   none                    FACTOR       -150.082           -500              0      welrate              1              0                   1
+pname:wel_0_inst:2_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103  none                    FACTOR       -150.082           -500              0      welrate              1              0                   1
+pname:wel_0_inst:3_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28   none                    FACTOR       -150.094           -500              0      welrate              1              0                   1
+pname:wel_0_inst:3_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34   none                    FACTOR       -150.094           -500              0      welrate              1              0                   1
+pname:wel_0_inst:3_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61   none                    FACTOR       -150.094           -500              0      welrate              1              0                   1
+pname:wel_0_inst:3_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79   none                    FACTOR       -150.094           -500              0      welrate              1              0                   1
+pname:wel_0_inst:3_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88   none                    FACTOR       -150.094           -500              0      welrate              1              0                   1
+pname:wel_0_inst:3_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103  none                    FACTOR       -150.094           -500              0      welrate              1              0                   1
+pname:wel_0_inst:4_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28   none                    FACTOR       -150.067           -500              0      welrate              1              0                   1
+pname:wel_0_inst:4_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34   none                    FACTOR       -150.067           -500              0      welrate              1              0                   1
+pname:wel_0_inst:4_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61   none                    FACTOR       -150.067           -500              0      welrate              1              0                   1
+pname:wel_0_inst:4_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79   none                    FACTOR       -150.067           -500              0      welrate              1              0                   1
+pname:wel_0_inst:4_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88   none                    FACTOR       -150.067           -500              0      welrate              1              0                   1
+pname:wel_0_inst:4_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103  none                    FACTOR       -150.067           -500              0      welrate              1              0                   1
+pname:wel_0_inst:5_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28   none                    FACTOR       -150.086           -500              0      welrate              1              0                   1
+pname:wel_0_inst:5_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34   none                    FACTOR       -150.086           -500              0      welrate              1              0                   1
+pname:wel_0_inst:5_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61   none                    FACTOR       -150.086           -500              0      welrate              1              0                   1
+pname:wel_0_inst:5_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79   none                    FACTOR       -150.086           -500              0      welrate              1              0                   1
+pname:wel_0_inst:5_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88   none                    FACTOR       -150.086           -500              0      welrate              1              0                   1
+pname:wel_0_inst:5_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103  none                    FACTOR       -150.086           -500              0      welrate              1              0                   1
+pname:wel_0_inst:6_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28   none                    FACTOR       -150.081           -500              0      welrate              1              0                   1
+pname:wel_0_inst:6_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34   none                    FACTOR       -150.081           -500              0      welrate              1              0                   1
+pname:wel_0_inst:6_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61   none                    FACTOR       -150.081           -500              0      welrate              1              0                   1
+pname:wel_0_inst:6_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79   none                    FACTOR       -150.081           -500              0      welrate              1              0                   1
+pname:wel_0_inst:6_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88   none                    FACTOR       -150.081           -500              0      welrate              1              0                   1
+pname:wel_0_inst:6_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103  none                    FACTOR       -150.081           -500              0      welrate              1              0                   1
+pname:wel_0_inst:7_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28   none                    FACTOR       -150.075           -500              0      welrate              1              0                   1
+pname:wel_0_inst:7_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34   none                    FACTOR       -150.075           -500              0      welrate              1              0                   1
+pname:wel_0_inst:7_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61   none                    FACTOR       -150.075           -500              0      welrate              1              0                   1
+pname:wel_0_inst:7_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79   none                    FACTOR       -150.075           -500              0      welrate              1              0                   1
+pname:wel_0_inst:7_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88   none                    FACTOR       -150.075           -500              0      welrate              1              0                   1
+pname:wel_0_inst:7_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103  none                    FACTOR       -150.075           -500              0      welrate              1              0                   1
+pname:wel_0_inst:8_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28   none                    FACTOR        -150.06           -500              0      welrate              1              0                   1
+pname:wel_0_inst:8_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34   none                    FACTOR        -150.06           -500              0      welrate              1              0                   1
+pname:wel_0_inst:8_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61   none                    FACTOR        -150.06           -500              0      welrate              1              0                   1
+pname:wel_0_inst:8_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79   none                    FACTOR        -150.06           -500              0      welrate              1              0                   1
+pname:wel_0_inst:8_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88   none                    FACTOR        -150.06           -500              0      welrate              1              0                   1
+pname:wel_0_inst:8_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103  none                    FACTOR        -150.06           -500              0      welrate              1              0                   1
+pname:wel_0_inst:9_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28   none                    FACTOR       -150.069           -500              0      welrate              1              0                   1
+pname:wel_0_inst:9_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34   none                    FACTOR       -150.069           -500              0      welrate              1              0                   1
+pname:wel_0_inst:9_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61   none                    FACTOR       -150.069           -500              0      welrate              1              0                   1
+pname:wel_0_inst:9_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79   none                    FACTOR       -150.069           -500              0      welrate              1              0                   1
+pname:wel_0_inst:9_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88   none                    FACTOR       -150.069           -500              0      welrate              1              0                   1
+pname:wel_0_inst:9_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103  none                    FACTOR       -150.069           -500              0      welrate              1              0                   1
+pname:wel_0_inst:10_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28  none                    FACTOR       -150.066           -500              0      welrate              1              0                   1
+pname:wel_0_inst:10_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34  none                    FACTOR       -150.066           -500              0      welrate              1              0                   1
+pname:wel_0_inst:10_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61  none                    FACTOR       -150.066           -500              0      welrate              1              0                   1
+pname:wel_0_inst:10_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79  none                    FACTOR       -150.066           -500              0      welrate              1              0                   1
+pname:wel_0_inst:10_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88  none                    FACTOR       -150.066           -500              0      welrate              1              0                   1
+pname:wel_0_inst:10_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103 none                    FACTOR       -150.066           -500              0      welrate              1              0                   1
+pname:wel_0_inst:11_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28  none                    FACTOR       -150.085           -500              0      welrate              1              0                   1
+pname:wel_0_inst:11_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34  none                    FACTOR       -150.085           -500              0      welrate              1              0                   1
+pname:wel_0_inst:11_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61  none                    FACTOR       -150.085           -500              0      welrate              1              0                   1
+pname:wel_0_inst:11_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79  none                    FACTOR       -150.085           -500              0      welrate              1              0                   1
+pname:wel_0_inst:11_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88  none                    FACTOR       -150.085           -500              0      welrate              1              0                   1
+pname:wel_0_inst:11_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103 none                    FACTOR       -150.085           -500              0      welrate              1              0                   1
+pname:wel_0_inst:12_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28  none                    FACTOR       -150.083           -500              0      welrate              1              0                   1
+pname:wel_0_inst:12_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34  none                    FACTOR       -150.083           -500              0      welrate              1              0                   1
+pname:wel_0_inst:12_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61  none                    FACTOR       -150.083           -500              0      welrate              1              0                   1
+pname:wel_0_inst:12_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79  none                    FACTOR       -150.083           -500              0      welrate              1              0                   1
+pname:wel_0_inst:12_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88  none                    FACTOR       -150.083           -500              0      welrate              1              0                   1
+pname:wel_0_inst:12_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103 none                    FACTOR       -150.083           -500              0      welrate              1              0                   1
+pname:wel_0_inst:13_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28  none                    FACTOR       -150.064           -500              0      welrate              1              0                   1
+pname:wel_0_inst:13_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34  none                    FACTOR       -150.064           -500              0      welrate              1              0                   1
+pname:wel_0_inst:13_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61  none                    FACTOR       -150.064           -500              0      welrate              1              0                   1
+pname:wel_0_inst:13_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79  none                    FACTOR       -150.064           -500              0      welrate              1              0                   1
+pname:wel_0_inst:13_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88  none                    FACTOR       -150.064           -500              0      welrate              1              0                   1
+pname:wel_0_inst:13_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103 none                    FACTOR       -150.064           -500              0      welrate              1              0                   1
+pname:wel_0_inst:14_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28  none                    FACTOR       -150.076           -500              0      welrate              1              0                   1
+pname:wel_0_inst:14_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34  none                    FACTOR       -150.076           -500              0      welrate              1              0                   1
+pname:wel_0_inst:14_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61  none                    FACTOR       -150.076           -500              0      welrate              1              0                   1
+pname:wel_0_inst:14_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79  none                    FACTOR       -150.076           -500              0      welrate              1              0                   1
+pname:wel_0_inst:14_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88  none                    FACTOR       -150.076           -500              0      welrate              1              0                   1
+pname:wel_0_inst:14_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103 none                    FACTOR       -150.076           -500              0      welrate              1              0                   1
+pname:wel_0_inst:15_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28  none                    FACTOR       -150.082           -500              0      welrate              1              0                   1
+pname:wel_0_inst:15_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34  none                    FACTOR       -150.082           -500              0      welrate              1              0                   1
+pname:wel_0_inst:15_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61  none                    FACTOR       -150.082           -500              0      welrate              1              0                   1
+pname:wel_0_inst:15_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79  none                    FACTOR       -150.082           -500              0      welrate              1              0                   1
+pname:wel_0_inst:15_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88  none                    FACTOR       -150.082           -500              0      welrate              1              0                   1
+pname:wel_0_inst:15_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103 none                    FACTOR       -150.082           -500              0      welrate              1              0                   1
+pname:wel_0_inst:16_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28  none                    FACTOR       -150.078           -500              0      welrate              1              0                   1
+pname:wel_0_inst:16_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34  none                    FACTOR       -150.078           -500              0      welrate              1              0                   1
+pname:wel_0_inst:16_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61  none                    FACTOR       -150.078           -500              0      welrate              1              0                   1
+pname:wel_0_inst:16_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79  none                    FACTOR       -150.078           -500              0      welrate              1              0                   1
+pname:wel_0_inst:16_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88  none                    FACTOR       -150.078           -500              0      welrate              1              0                   1
+pname:wel_0_inst:16_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103 none                    FACTOR       -150.078           -500              0      welrate              1              0                   1
+pname:wel_0_inst:17_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28  none                    FACTOR       -150.079           -500              0      welrate              1              0                   1
+pname:wel_0_inst:17_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34  none                    FACTOR       -150.079           -500              0      welrate              1              0                   1
+pname:wel_0_inst:17_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61  none                    FACTOR       -150.079           -500              0      welrate              1              0                   1
+pname:wel_0_inst:17_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79  none                    FACTOR       -150.079           -500              0      welrate              1              0                   1
+pname:wel_0_inst:17_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88  none                    FACTOR       -150.079           -500              0      welrate              1              0                   1
+pname:wel_0_inst:17_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103 none                    FACTOR       -150.079           -500              0      welrate              1              0                   1
+pname:wel_0_inst:18_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28  none                    FACTOR       -150.084           -500              0      welrate              1              0                   1
+pname:wel_0_inst:18_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34  none                    FACTOR       -150.084           -500              0      welrate              1              0                   1
+pname:wel_0_inst:18_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61  none                    FACTOR       -150.084           -500              0      welrate              1              0                   1
+pname:wel_0_inst:18_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79  none                    FACTOR       -150.084           -500              0      welrate              1              0                   1
+pname:wel_0_inst:18_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88  none                    FACTOR       -150.084           -500              0      welrate              1              0                   1
+pname:wel_0_inst:18_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103 none                    FACTOR       -150.084           -500              0      welrate              1              0                   1
+pname:wel_0_inst:19_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28  none                    FACTOR       -150.059           -500              0      welrate              1              0                   1
+pname:wel_0_inst:19_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34  none                    FACTOR       -150.059           -500              0      welrate              1              0                   1
+pname:wel_0_inst:19_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61  none                    FACTOR       -150.059           -500              0      welrate              1              0                   1
+pname:wel_0_inst:19_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79  none                    FACTOR       -150.059           -500              0      welrate              1              0                   1
+pname:wel_0_inst:19_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88  none                    FACTOR       -150.059           -500              0      welrate              1              0                   1
+pname:wel_0_inst:19_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103 none                    FACTOR       -150.059           -500              0      welrate              1              0                   1
+pname:wel_0_inst:20_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28  none                    FACTOR       -150.083           -500              0      welrate              1              0                   1
+pname:wel_0_inst:20_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34  none                    FACTOR       -150.083           -500              0      welrate              1              0                   1
+pname:wel_0_inst:20_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61  none                    FACTOR       -150.083           -500              0      welrate              1              0                   1
+pname:wel_0_inst:20_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79  none                    FACTOR       -150.083           -500              0      welrate              1              0                   1
+pname:wel_0_inst:20_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88  none                    FACTOR       -150.083           -500              0      welrate              1              0                   1
+pname:wel_0_inst:20_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103 none                    FACTOR       -150.083           -500              0      welrate              1              0                   1
+pname:wel_0_inst:21_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28  none                    FACTOR       -150.087           -500              0      welrate              1              0                   1
+pname:wel_0_inst:21_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34  none                    FACTOR       -150.087           -500              0      welrate              1              0                   1
+pname:wel_0_inst:21_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61  none                    FACTOR       -150.087           -500              0      welrate              1              0                   1
+pname:wel_0_inst:21_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79  none                    FACTOR       -150.087           -500              0      welrate              1              0                   1
+pname:wel_0_inst:21_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88  none                    FACTOR       -150.087           -500              0      welrate              1              0                   1
+pname:wel_0_inst:21_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103 none                    FACTOR       -150.087           -500              0      welrate              1              0                   1
+pname:wel_0_inst:22_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28  none                    FACTOR       -150.073           -500              0      welrate              1              0                   1
+pname:wel_0_inst:22_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34  none                    FACTOR       -150.073           -500              0      welrate              1              0                   1
+pname:wel_0_inst:22_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61  none                    FACTOR       -150.073           -500              0      welrate              1              0                   1
+pname:wel_0_inst:22_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79  none                    FACTOR       -150.073           -500              0      welrate              1              0                   1
+pname:wel_0_inst:22_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88  none                    FACTOR       -150.073           -500              0      welrate              1              0                   1
+pname:wel_0_inst:22_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103 none                    FACTOR       -150.073           -500              0      welrate              1              0                   1
+pname:wel_0_inst:23_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28  none                    FACTOR       -150.059           -500              0      welrate              1              0                   1
+pname:wel_0_inst:23_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34  none                    FACTOR       -150.059           -500              0      welrate              1              0                   1
+pname:wel_0_inst:23_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61  none                    FACTOR       -150.059           -500              0      welrate              1              0                   1
+pname:wel_0_inst:23_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79  none                    FACTOR       -150.059           -500              0      welrate              1              0                   1
+pname:wel_0_inst:23_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88  none                    FACTOR       -150.059           -500              0      welrate              1              0                   1
+pname:wel_0_inst:23_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103 none                    FACTOR       -150.059           -500              0      welrate              1              0                   1
+pname:wel_0_inst:24_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:28  none                    FACTOR       -150.068           -500              0      welrate              1              0                   1
+pname:wel_0_inst:24_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:34  none                    FACTOR       -150.068           -500              0      welrate              1              0                   1
+pname:wel_0_inst:24_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:61  none                    FACTOR       -150.068           -500              0      welrate              1              0                   1
+pname:wel_0_inst:24_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:79  none                    FACTOR       -150.068           -500              0      welrate              1              0                   1
+pname:wel_0_inst:24_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:88  none                    FACTOR       -150.068           -500              0      welrate              1              0                   1
+pname:wel_0_inst:24_ptype:gr_usecol:3_pstyle:d_idx0:2_idx1:103 none                    FACTOR       -150.068           -500              0      welrate              1              0                   1
+pname:sfr_0_inst:0_ptype:gr_usecol:2_pstyle:d_idx0:0           none                  RELATIVE            500              0           1200    sfrinflow              1              0                   1
+pname:sfr_0_inst:0_ptype:gr_usecol:2_pstyle:d_idx0:60          none                  RELATIVE            100              0           1200    sfrinflow              1              0                   1
+pname:rch_0_inst:0_ptype:cn_pstyle:d                           none                    FACTOR         0.0001          5e-05         0.0002          rch              1              0                   1
+
+
+
+...more than 100,000 obs, not writing obs data
+
+Prior information
+
+   no prior information provided
+
+
+
+PEST SVD Information
+    maxsing = 10000000
+    eigthresh = 1e-06
+
+
+
+
+
+...resetting max_run_fail to 1
+...resetting overdue_resched_fac to 1.15
+
+  ---  initializing  ---  
+...using glm algorithm
+...using REDSVD for truncated svd solve
+...maxsing: 10000000
+...eigthresh:  1e-06
+...initializing localizer
+...not using localization
+...using lambda multipliers: 0.1 , 1 , 10 , 
+...using lambda scaling factors: 0.75 , 1 , 1.1 , 
+...acceptable phi factor:  1.05
+...lambda increase factor:  10
+...lambda decrease factor:  0.75
+...max run fail:  1
+...initializing prior parameter covariance matrix
+...parcov loaded  from parameter bounds, using par_sigma_range 4
+...using reg_factor:  0
+...loading par ensemble from csv file dv_ens.csv
+...not using prior parameter covariance matrix scaling
+...initializing no-noise observation ensemble of :  30
+...setting weights ensemble to zeros - no non-zero weighted obs found
+...saved weight ensemble to  freyberg.weights.jcb
+checking for denormal values in weights ensemble
+resetting obs + noise ensemble real names to parameter ensemble real names
+checking for denormal values in pe
+...saved initial parameter ensemble to  freyberg.0.par.jcb
+checking for denormal values in obs + noise ensemble
+...saved obs+noise observation ensemble (obsval + noise realizations) to  freyberg.obs+noise.jcb
+...using subset in lambda testing, number of realizations used in subset testing:  4
+...subset how:  RANDOM
+...centering on ensemble mean vector
+...running initial ensemble of size 30
+...saved initial obs ensemble to freyberg.0.obs.jcb
+
+  ---  pre-drop initial phi summary  ---  
+       phi type           mean            std            min            max
+         actual              0              0              0              0
+  ---  observation group phi summary ---  
+       (computed using 'actual' phi)
+           (sorted by mean phi)
+group      mean       std       min       max   percent       std
+    Note: 'percent' is the percentage of the actual phi for each realization.
+
+
+
+...checking for prior-data conflict...
+...bad_phi_sigma 1e+300 and mean 0 yields bad phi threshold of 0
+
+  ---  initial phi summary  ---  
+       phi type           mean            std            min            max
+         actual              0              0              0              0
+  ---  observation group phi summary ---  
+       (computed using 'actual' phi)
+           (sorted by mean phi)
+group      mean       std       min       max   percent       std
+    Note: 'percent' is the percentage of the actual phi for each realization.
+
+
+
+
+  ---  initialization complete  ---  
+
+
+pestpp-ies analysis complete...
+started at 11/13/24 11:48:39
+finished at 11/13/24 11:51:00
+took 2.33333 minutes

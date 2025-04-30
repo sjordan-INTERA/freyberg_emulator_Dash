@@ -1,0 +1,48 @@
+time,elapsed_seconds,message
+11:48:39,6.75e-05,PEST++ performance logger started
+11:48:39,0.0012127,starting to process control file
+11:48:42,2.48355,finished processing control file
+11:48:42,0.287173,initializing
+11:48:42,0.0443164,using glm algorithm
+11:48:42,0.0007311,using REDSVD for truncated svd solve
+11:48:42,0.0007248,maxsing: 10000000
+11:48:42,0.0006442,eigthresh:  1e-06
+11:48:42,0.000277,initializing localizer
+11:48:42,0.0005108,not using localization
+11:48:42,0.000493,using lambda multipliers: 
+11:48:42,0.0005023,using lambda scaling factors: 
+11:48:42,0.0002618,acceptable phi factor:  1.05
+11:48:42,0.000121,lambda increase factor:  10
+11:48:42,0.0002431,lambda decrease factor:  0.75
+11:48:42,0.0004834,max run fail:  1
+11:48:42,0.129724,initializing prior parameter covariance matrix
+11:48:42,2.8e-05,initializing parcov
+11:48:42,0.0005391,parcov loaded  from parameter bounds, using par_sigma_range 4
+11:48:42,0.0007027,using reg_factor:  0
+11:48:42,2.09e-05,processing par csv dv_ens.csv
+11:48:42,0.000479,loading par ensemble from csv file dv_ens.csv
+11:48:42,0.0051475,not using prior parameter covariance matrix scaling
+11:48:42,0.0002843,initializing no-noise observation ensemble of :  30
+11:48:43,0.393532,setting weights ensemble to zeros - no non-zero weighted obs found
+11:48:44,1.30465,saved weight ensemble to  freyberg.weights.jcb
+11:48:44,2.84e-05,checking for denormal values in weights ensemble
+11:48:44,0.0617061,resetting obs + noise ensemble real names to parameter ensemble real names
+11:48:44,6.65e-05,checking for denormal values in pe
+11:48:44,0.0031094,saved initial parameter ensemble to  freyberg.0.par.jcb
+11:48:44,2.22e-05,checking for denormal values in obs + noise ensemble
+11:48:45,1.16789,saved obs+noise observation ensemble (obsval + noise realizations) to  freyberg.obs+noise.jcb
+11:48:45,0.0003933,using subset in lambda testing, number of realizations used in subset testing:  4
+11:48:45,0.0003975,subset how:  RANDOM
+11:48:45,0.0268641,centering on ensemble mean vector
+11:48:45,2.35e-05,running initial ensemble
+11:48:45,0.0001877,running initial ensemble of size 30
+11:48:45,1.3e-05,queuing 30 runs
+11:48:45,0.18502,making runs
+11:50:51,125.346,processing runs
+11:50:54,3.77823,saved initial obs ensemble to freyberg.0.obs.jcb
+11:50:54,4.82e-05,calc pre-drop phi
+11:50:56,1.19985,pre-drop initial phi summary
+11:50:56,0.382333,checking for prior-data conflict...
+11:50:56,0.247439,calc initial phi
+11:50:57,1.04841,initial phi summary
+11:50:57,0.0609715,initialization complete
