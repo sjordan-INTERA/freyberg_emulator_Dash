@@ -66,13 +66,7 @@ def response_matrix_emulator(dv_pars,
     assert set(dv_pars.index).issubset(par.index), "dv_pars index values not found in parameter data"
     
     # get the forecast_df
-    if isinstance(forecast_df,str):
-        assert os.path.exists(os.path.join(md,forecast_df)), "forecast response not found"
-        forecast_df = pd.read_csv(os.path.join(md,forecast_df),index_col=0)
-    elif isinstance(forecast_df,pd.DataFrame):
-        forecast_df = forecast_df #derp
-    else:
-        raise ValueError("forecast_csv must be a str or pd.DataFrame")
+    forecast_df = pd.read_csv(os.path.join(md,forecast_df),index_col=0)
     forecast_names = forecast_df.index.tolist()
 
     # get the resp mat
@@ -107,7 +101,7 @@ def response_matrix_emulator(dv_pars,
     # calculate the forecast response to changes
     forecast_df["change"] = resp_vec.x.flatten()
     forecast_df["forecast"] = resp_vec.x.flatten() + forecast_df.modelled.values
-    forecast_df.to_csv(os.path.join(md,"forecast_response.csv"))
+    # forecast_df.to_csv(os.path.join(md,"forecast_response.csv"))
     return forecast_df
 
 
