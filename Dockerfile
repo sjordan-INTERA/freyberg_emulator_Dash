@@ -12,8 +12,8 @@ COPY ./app /app
 RUN set -ex && \
     apt-get update && apt-get install -y unzip && \
     pip install --no-cache-dir -r requirements.txt && \
-    unzip /app/assets/my_large_file.zip -d /app/assets/ && \
-    rm /app/assets/my_large_file.zip
+    unzip /app/assets/response.zip -d /app/assets/ && \
+    rm /app/assets/response.zip
 
 EXPOSE 8050
 
