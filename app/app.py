@@ -22,11 +22,30 @@ import pyemu
 global forecast_results
 forecast_results = pd.DataFrame()
 
+# --------------
 # Define the app
+# --------------
 app = Dash(__name__,
             external_stylesheets=[dbc.themes.BOOTSTRAP],
             )
 server = app.server  # --> This is for Docker
+
+
+# Get the base path depending on whether the app is frozen or not
+if getattr(sys, 'frozen', False):
+    base_path = sys._MEIPASS  # Path to the temporary folder used by PyInstaller
+else:
+    base_path = os.path.dirname(os.path.abspath(__name__))
+
+# --------------------------------
+# Load data necessary for emulator
+# -------------------------------- 
+md = os.path.join(base_path, "assets")
+pst = pyemu.Pst(os.path.join(md, "master", "freyberg.pst"))
+par = pst.parameter_data
+obs = pst.observation_data
+rm = pyemu.Matrix.from_binary(os.path.join(md,"master","response.jcb"))
+
 
 # Copying over from workflow.py to avoid import
 def response_matrix_emulator(dv_pars,
@@ -60,7 +79,7 @@ def response_matrix_emulator(dv_pars,
     assert isinstance(dv_pars,pd.DataFrame)
     assert "parval1" in dv_pars.columns, "parval1 column not found in dv_pars"
 
-    par = pd.read_csv("assets/pars.csv", index_col=0)
+    par = pd.read_csv(os.path.join(md,"pars.csv"), index_col=0)
     # check that all of dv_pars index values are in par
     assert set(dv_pars.index).issubset(par.index), "dv_pars index values not found in parameter data"
     
@@ -103,21 +122,6 @@ def response_matrix_emulator(dv_pars,
     forecast_df["forecast"] = resp_vec.x.flatten() + forecast_df.modelled.values
     # forecast_df.to_csv(os.path.join(md,"forecast_response.csv"))
     return forecast_df
-
-
-# Get the base path depending on whether the app is frozen or not
-if getattr(sys, 'frozen', False):
-    base_path = sys._MEIPASS  # Path to the temporary folder used by PyInstaller
-else:
-    base_path = os.path.dirname(os.path.abspath(__name__))
-    
-# Load data necessary for emulator 
-md = os.path.join(base_path, "assets")
-pst = pyemu.Pst(os.path.join(md, "master", "freyberg.pst"))
-par = pst.parameter_data
-obs = pst.observation_data
-rm = pyemu.Matrix.from_binary(os.path.join(md,"master","response.jcb"))
-
 
 # --------------------------------------------------------
 # Function to run the emulator with selected perturbations
