@@ -5,15 +5,13 @@ ENV DASH_DEBUG_MODE=False
 # Set working directory
 WORKDIR /app
 
-# Copy app and zipped file
+# Copy app files
 COPY ./app /app
 
-# Install dependencies + unzip file
+# Install dependencies
 RUN set -ex && \
     apt-get update && apt-get install -y unzip && \
-    pip install --no-cache-dir -r requirements.txt && \
-    unzip /app/assets/master/response.zip -d /app/assets/master/ && \
-    rm /app/assets/master/response.zip
+    pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8050
 
