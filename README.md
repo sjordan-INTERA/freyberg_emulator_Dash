@@ -1,6 +1,6 @@
 # Freyberg Model Emulator
 
-Dashboard script + everything required to put it into a Docker container
+Dashboard script + everything required to put it into a Docker container. Relies on a pre-processed response matrix that's been made Sparse in order to optimize memory useage.
 
 ## Steps to Run:
 1. From the parent directory, use the command "docker build -t freyberg-app ." to build Docker container
