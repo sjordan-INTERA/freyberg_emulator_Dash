@@ -17,8 +17,8 @@ from datetime import timedelta
 import sys
 import os
 import pyemu
-
-
+import pickle
+from scipy import sparse
 global forecast_results
 forecast_results = pd.DataFrame()
 
@@ -44,83 +44,60 @@ md = os.path.join(base_path, "assets")
 pst = pyemu.Pst(os.path.join(md, "master", "freyberg.pst"))
 par = pst.parameter_data
 obs = pst.observation_data
-rm = pyemu.Matrix.from_binary(os.path.join(md,"master","response.jcb"))
 
 
-# Copying over from workflow.py to avoid import
-def response_matrix_emulator(dv_pars,
-                             forecast_df,
-                             md="assets/master",
-                             response_jcb="response.jcb",
-                             ):
+def rm_2_sparse():
+    # Set up output directory
+    base_path = "assets/memmap"
+    os.makedirs(base_path, exist_ok=True)
+    
+    # Load the response matrix from binary
+    rm = pyemu.Matrix.from_binary("assets/master/response.jcb")
+    
+    # Convert to sparse matrix
+    sparse_matrix = sparse.csr_matrix(rm.x)
+    
+    # Save the sparse matrix
+    sparse.save_npz(os.path.join(base_path, "response_sparse.npz"), sparse_matrix)
+    
+    # Save the row and column names
+    with open(os.path.join(base_path, "response_names_sparse.pkl"), "wb") as f:
+        pickle.dump((rm.row_names, rm.col_names), f)
+
+
+def response_matrix_emulator_sparse(dv_pars, forecast_df, md="assets/memmap"):
     """
-    
-    Calculate the forecast response given changes in decision variables
-    
-    Parameters
-    ----------
-    dv_pars : pd.DataFrame
-        DataFrame with 'parval1' column and index containing dv_par parameter names
-    md : str, optional
-        model directory, by default "master"
-    response_jcb : str or pyemu.matrix, optional
-        response matrix file, by default "response.jcb"
-    forecast_csv : str, optional
-        forecast response file, by default "forecast_response.csv"
-
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame with forecast response, change and original values.
-        
+    Emulator using a memory-efficient sparse Jacobian matrix (.npz).
     """
+    # Load sparse matrix
+    sparse_matrix = sparse.load_npz(os.path.join(md, "memmap", "response_sparse.npz"))
 
-    # dv_pars must be a DataFrame with a 'parval1' column 
-    assert isinstance(dv_pars,pd.DataFrame)
-    assert "parval1" in dv_pars.columns, "parval1 column not found in dv_pars"
+    # Load row and column names
+    with open(os.path.join(md, "memmap", "response_names_sparse.pkl"), "rb") as f:
+        row_names, col_names = pickle.load(f)
 
-    par = pd.read_csv(os.path.join(md,"..","pars.csv"), index_col=0)
-    # check that all of dv_pars index values are in par
-    assert set(dv_pars.index).issubset(par.index), "dv_pars index values not found in parameter data"
-    
-    # get the forecast_names
-    forecast_names = forecast_df.index.tolist()
+    # Fast lookup dictionaries
+    row_dict = {name: i for i, name in enumerate(row_names)}
+    col_dict = {name: i for i, name in enumerate(col_names)}
 
-    # get the resp mat
-    if isinstance(response_jcb,str):
-        assert os.path.exists(os.path.join(md,response_jcb)), "response matrix not found"
-        resp_mat = pyemu.Matrix.from_binary(os.path.join(md,response_jcb))
-    elif isinstance(response_jcb,pyemu.Matrix):
-        resp_mat = response_jcb
-    else:
-        raise ValueError("response_jcb must be a str or pyemu.Jco")
-        
-    # keep only pars in dv_pars...and align
-    assert set(dv_pars.index).issubset(resp_mat.col_names), f"dv_pars index values not found in {response_jcb} col_names"
-    assert set(forecast_names).issubset(resp_mat.row_names), f"forecast names not found in {response_jcb} row_names"
+    # Align and trim dv_pars and forecast_df
+    dv_pars = dv_pars.loc[dv_pars.index.intersection(col_names)].copy()
+    forecast_df = forecast_df.loc[forecast_df.index.intersection(row_names)].copy()
 
-    # keep only relevant rows and cols
-    resp_mat = resp_mat.get(row_names=forecast_names,
-                            col_names=dv_pars.index.tolist())
-    
-    # align
-    dv_pars = dv_pars.loc[resp_mat.col_names, :]
-    forecast_df = forecast_df.loc[resp_mat.row_names, :]
-    assert dv_pars.shape[0] == resp_mat.shape[1], "dv_pars and response matrix are not aligned"
-    assert forecast_df.shape[0] == resp_mat.shape[0], "forecast_df and response matrix are not aligned"
+    # Indexing
+    row_idx = [row_dict[rn] for rn in forecast_df.index]
+    col_idx = [col_dict[cn] for cn in dv_pars.index]
 
-    # calc change in dvpars
-    dv_pars["change"] = dv_pars.parval1 - par.loc[dv_pars.index.tolist()].parval1
-    #check for nans
-    assert dv_pars.change.isnull().any()==False, f"nan values found in dv_pars: {dv_pars.isnull().any()}"
+    # Load only needed par values
+    par = pd.read_csv(os.path.join(md, "pars.csv"), index_col=0)
+    par = par.loc[dv_pars.index]
+    dv_pars["change"] = dv_pars["parval1"] - par["parval1"]
 
-    # mat-vec mult
-    resp_vec = resp_mat * dv_pars.change.values
+    # Slice sparse matrix and compute dot product
+    submat = sparse_matrix[row_idx, :][:, col_idx]  # efficient submatrix slicing
+    forecast_df["change"] = submat.dot(dv_pars["change"].values)
+    forecast_df["forecast"] = forecast_df["change"] + forecast_df["modelled"]
 
-    # calculate the forecast response to changes
-    forecast_df["change"] = resp_vec.x.flatten()
-    forecast_df["forecast"] = resp_vec.x.flatten() + forecast_df.modelled.values
-    # forecast_df.to_csv(os.path.join(md,"forecast_response.csv"))
     return forecast_df
 
 # --------------------------------------------------------
@@ -138,7 +115,8 @@ def run_emulator(input_dict):
     # This will be the forecasted dataframe
     # We will 'disturb' by each mult-param combo
     forecast_df = forecast_df.loc[_df.obsnme.tolist(),:]
-    dv_pars = dv_pars = pst.parameter_data.loc[rm.col_names,:].copy()
+    col_names = np.load(os.path.join(md,'master','rm_col_names.npy'))
+    dv_pars = pst.parameter_data.loc[col_names,:].copy()
     dv_pars["parval1_org"] = dv_pars.parval1.copy() # keep a backup of the original values
     
     # Pumping rate inputs
@@ -180,11 +158,14 @@ def run_emulator(input_dict):
             dv_pars.loc[dv_pars.parnme==key,"parval1"] *= mult
     
     # Create forecasted results
-    forecast_results = response_matrix_emulator(dv_pars, 
-                                                forecast_df=forecast_df,
-                                                md=os.path.join(md,"master"),
-                                                response_jcb=rm,
-                                                )
+    # forecast_results = response_matrix_emulator(dv_pars, 
+    #                                             forecast_df=forecast_df,
+    #                                             md=os.path.join(md,"master"),
+    #                                             response_jcb=rm,
+    #                                             )
+    
+    forecast_results = response_matrix_emulator_sparse(dv_pars, forecast_df, md=md)
+
 
     return forecast_results
 
