@@ -31,9 +31,10 @@ server = app.server  # --> This is for Docker
 
 # Copying over from workflow.py to avoid import
 def response_matrix_emulator(dv_pars,
+                             forecast_df,
                              md="assets/master",
                              response_jcb="response.jcb",
-                             forecast_df="forecast_response.csv"):
+                             ):
     """
     
     Calculate the forecast response given changes in decision variables
@@ -65,8 +66,7 @@ def response_matrix_emulator(dv_pars,
     # check that all of dv_pars index values are in par
     assert set(dv_pars.index).issubset(par.index), "dv_pars index values not found in parameter data"
     
-    # get the forecast_df
-    forecast_df = pd.read_csv(os.path.join(md,forecast_df),index_col=0)
+    # get the forecast_names
     forecast_names = forecast_df.index.tolist()
 
     # get the resp mat
@@ -123,7 +123,6 @@ rm = pyemu.Matrix.from_binary(os.path.join(md,"master","response.jcb"))
 # Function to run the emulator with selected perturbations
 # --------------------------------------------------------
 def run_emulator(input_dict):
-    print(input_dict)
     # Grab a copy...
     forecast_df = pst.res.loc[:,["modelled"]].copy()
     
@@ -178,9 +177,10 @@ def run_emulator(input_dict):
     
     # Create forecasted results
     forecast_results = response_matrix_emulator(dv_pars, 
+                                                forecast_df=forecast_df,
                                                 md=os.path.join(md,"master"),
                                                 response_jcb=rm,
-                                                forecast_df=forecast_df)
+                                                )
 
     return forecast_results
 
