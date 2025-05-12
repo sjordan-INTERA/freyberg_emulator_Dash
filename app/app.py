@@ -11,9 +11,9 @@ import dash_daq as dq
 import dash_bootstrap_components as dbc
 import pandas as pd
 from datetime import timedelta
-# import dash_vtk
-# from dash_vtk.utils import to_mesh_state
-# import pyvista as pv
+import dash_vtk
+from dash_vtk.utils import to_mesh_state
+import pyvista as pv
 import sys
 import os
 import pyemu
@@ -157,13 +157,6 @@ def run_emulator(input_dict):
             key = 'pname:rch_0_inst:0_ptype:cn_pstyle:d'
             dv_pars.loc[dv_pars.parnme==key,"parval1"] *= mult
     
-    # Create forecasted results
-    # forecast_results = response_matrix_emulator(dv_pars, 
-    #                                             forecast_df=forecast_df,
-    #                                             md=os.path.join(md,"master"),
-    #                                             response_jcb=rm,
-    #                                             )
-    
     forecast_results = response_matrix_emulator_sparse(dv_pars, forecast_df, md=md)
 
 
@@ -172,8 +165,8 @@ def run_emulator(input_dict):
 # --------------------------------
 # Create Homepage Figure using vtk
 # --------------------------------
-# scaled_mesh_botm = pv.read(os.path.join(md,'dis_formatted.vtk'))
-# mesh_state_botm = to_mesh_state(scaled_mesh_botm,'botm')
+scaled_mesh_botm = pv.read(os.path.join(md,'dis_formatted.vtk'))
+mesh_state_botm = to_mesh_state(scaled_mesh_botm,'botm')
 
 
 # ----------------------------------------------------------------------- #
@@ -265,147 +258,147 @@ app.layout = html.Div([
                         ),
 
                         html.Br(),
-                        # html.Div([
-                        #     html.H3('Model Grid', style={'text-align': 'center', 'color': '#333', 'font-weight': 'bold'}),
-                        #     # Options for the VTK figure
-                        #     html.Div([
-                        #         html.P('Change grid opacity:'),
-                        #         dcc.Dropdown(placeholder='Grid cell opacity',
-                        #                      id='vtk_opactiy_dd',
-                        #                      options=[x/10 for x in range(1,11)],
-                        #                      value=1,
-                        #                      clearable=False,
-                        #                      style={'margin-right': '10px', 'flex':'1','max-width': '200px'}
-                        #         ),
-                        #         dcc.Checklist(options=[{'label': 'Show grid-cell edges', 'value': 'edges'}],
-                        #                       id='edge-mode-checkbox',
-                        #                       value=[],
-                        #         ),
-                        #         dcc.Checklist(options=[{'label': 'Show model axes', 'value': 'axes'}],
-                        #                       id='axes-checkbox',
-                        #                       value=[],
-                        #         ),
-                        #         ],
-                        #         style={'display':'flex',
-                        #                'flex-direction':'row',
-                        #                'align-items': 'center',
-                        #                'gap': '10px',
-                        #                'background-color': '#f9f9f9',
-                        #                'border': '1px solid #ddd',
-                        #                'border-radius': '8px',
-                        #                'box-shadow': '2px 2px 10px rgba(0,0,0,0.05)',
-                        #                'padding': '10px',
-                        #                }
-                        #     ),
-                        #     html.Hr(),
-                        #     dash_vtk.View([
-                        #         dash_vtk.GeometryRepresentation(
-                        #             id='vtk-geometry-representation',
-                        #             children=[
-                        #                 dash_vtk.Mesh(state=mesh_state_botm)
-                        #             ],
-                        #             colorMapPreset="erdc_rainbow_bright",  # Use a preset color map
-                        #             # Set the color range for 'top' values
-                        #             colorDataRange=[-0.20274, 42.1417],
-                        #             property={"edgeVisibility": False,
-                        #                       "opacity": 1.0,
-                        #                       },
+                        html.Div([
+                            html.H3('Model Grid', style={'text-align': 'center', 'color': '#333', 'font-weight': 'bold'}),
+                            # Options for the VTK figure
+                            html.Div([
+                                html.P('Change grid opacity:'),
+                                dcc.Dropdown(placeholder='Grid cell opacity',
+                                             id='vtk_opactiy_dd',
+                                             options=[x/10 for x in range(1,11)],
+                                             value=1,
+                                             clearable=False,
+                                             style={'margin-right': '10px', 'flex':'1','max-width': '200px'}
+                                ),
+                                dcc.Checklist(options=[{'label': 'Show grid-cell edges', 'value': 'edges'}],
+                                              id='edge-mode-checkbox',
+                                              value=[],
+                                ),
+                                dcc.Checklist(options=[{'label': 'Show model axes', 'value': 'axes'}],
+                                              id='axes-checkbox',
+                                              value=[],
+                                ),
+                                ],
+                                style={'display':'flex',
+                                       'flex-direction':'row',
+                                       'align-items': 'center',
+                                       'gap': '10px',
+                                       'background-color': '#f9f9f9',
+                                       'border': '1px solid #ddd',
+                                       'border-radius': '8px',
+                                       'box-shadow': '2px 2px 10px rgba(0,0,0,0.05)',
+                                       'padding': '10px',
+                                       }
+                            ),
+                            html.Hr(),
+                            dash_vtk.View([
+                                dash_vtk.GeometryRepresentation(
+                                    id='vtk-geometry-representation',
+                                    children=[
+                                        dash_vtk.Mesh(state=mesh_state_botm)
+                                    ],
+                                    colorMapPreset="erdc_rainbow_bright",  # Use a preset color map
+                                    # Set the color range for 'top' values
+                                    colorDataRange=[-0.20274, 42.1417],
+                                    property={"edgeVisibility": False,
+                                              "opacity": 1.0,
+                                              },
 
-                        #         ),
-                        #         ],
-                        #         style={"height": "700px"},
-                        #         background=[0.788, 0.843, 0.969],
-                        #     ),
-                        #     ],
-                        #     style={'padding': '20px',
-                        #            'background-color': '#f9f9f9',
-                        #            'border': '1px solid #ddd',
-                        #            'border-radius': '8px',
-                        #            'box-shadow': '2px 2px 10px rgba(0,0,0,0.05)',
-                        #            'margin-top': '10px',
-                        #            'margin-bottom':'300px',
-                        #            'width':'95%',
-                        #            'margin': 'auto'}
-                        # ),
+                                ),
+                                ],
+                                style={"height": "700px"},
+                                background=[0.788, 0.843, 0.969],
+                            ),
+                            ],
+                            style={'padding': '20px',
+                                   'background-color': '#f9f9f9',
+                                   'border': '1px solid #ddd',
+                                   'border-radius': '8px',
+                                   'box-shadow': '2px 2px 10px rgba(0,0,0,0.05)',
+                                   'margin-top': '10px',
+                                   'margin-bottom':'300px',
+                                   'width':'95%',
+                                   'margin': 'auto'}
+                        ),
                     ],
                     style={'fontSize': '120%'},
                     selected_style={'fontSize': '125%'},
             ),
-            # dcc.Tab(label='Emulator Instructions',
-            #         children=[
-            #            html.Div([
-            #                 # Section: Steps to Generate Response Matrix
-            #                 # html.Div([
-            #                 #     html.H4('Steps to Generate the Freyberg Model Response Matrix using PEST', style={'text-align': 'center', 'color': '#333', 'font-weight': 'bold','text-decoration': 'underline'}),
-            #                 #     html.Br(),
-            #                 #     html.P(
-            #                 #         "Before running the Emulator, you must execute 'workflow.py'. Ensure the 'num_workers' parameter within this script is set to match your system's specifications (i.e., the number of available computing cores).",
-            #                 #         style={'line-height': '1.6', 'text-align': 'justify'}
-            #                 #     ),
-            #                 #     html.P(
-            #                 #         "This script will set up and run the Freyberg groundwater model, PstFrom, and pestpp-glm to generate a response matrix. Once this is done, the Dashboard will have access to the response matrix and all necessary output files in order to emulate the groundwater model.",
-            #                 #         style={'line-height': '1.6', 'text-align': 'justify'}
-            #                 #     ),
-            #                 # ], style={
-            #                 #     'padding': '20px',
-            #                 #     'background-color': '#f9f9f9',
-            #                 #     'border': '1px solid #ddd',
-            #                 #     'border-radius': '8px',
-            #                 #     'box-shadow': '2px 2px 10px rgba(0,0,0,0.05)',
-            #                 #     'margin-bottom': '20px'
-            #                 # }),
+            dcc.Tab(label='Emulator Instructions',
+                    children=[
+                       html.Div([
+                            # Section: Steps to Generate Response Matrix
+                            # html.Div([
+                            #     html.H4('Steps to Generate the Freyberg Model Response Matrix using PEST', style={'text-align': 'center', 'color': '#333', 'font-weight': 'bold','text-decoration': 'underline'}),
+                            #     html.Br(),
+                            #     html.P(
+                            #         "Before running the Emulator, you must execute 'workflow.py'. Ensure the 'num_workers' parameter within this script is set to match your system's specifications (i.e., the number of available computing cores).",
+                            #         style={'line-height': '1.6', 'text-align': 'justify'}
+                            #     ),
+                            #     html.P(
+                            #         "This script will set up and run the Freyberg groundwater model, PstFrom, and pestpp-glm to generate a response matrix. Once this is done, the Dashboard will have access to the response matrix and all necessary output files in order to emulate the groundwater model.",
+                            #         style={'line-height': '1.6', 'text-align': 'justify'}
+                            #     ),
+                            # ], style={
+                            #     'padding': '20px',
+                            #     'background-color': '#f9f9f9',
+                            #     'border': '1px solid #ddd',
+                            #     'border-radius': '8px',
+                            #     'box-shadow': '2px 2px 10px rgba(0,0,0,0.05)',
+                            #     'margin-bottom': '20px'
+                            # }),
                         
-            #                 # Section: Using the Emulator
-            #                 html.Div([
-            #                     html.H4('Using the Emulator', style={'text-align': 'center', 'color': '#333', 'font-weight': 'bold','text-decoration': 'underline'}),
-            #                     html.Br(),
+                            # Section: Using the Emulator
+                            html.Div([
+                                html.H4('Using the Emulator', style={'text-align': 'center', 'color': '#333', 'font-weight': 'bold','text-decoration': 'underline'}),
+                                html.Br(),
                         
-            #                     # Step 1
-            #                     html.H4('1. Select a Parameter Group to Adjust', style={'color': '#0066cc', 'font-weight': 'bold'}),
-            #                     html.P("Each parameter option represents a catagory of decision variables:", style={'line-height': '1.6'}),
-            #                     html.Ul(children=[
-            #                         html.Li("Pumping Rates: Pumping rates at each extraction well"),
-            #                         html.Li("Stream and WTP Inflows: inflows from upstream and mid-stream inflows from a water treatment plant"),
-            #                         html.Li("Antecedent Recharge: recharge in the steady state stress period (stress period 0)")
-            #                     ], style={'line-height': '1.6'}),
-            #                     html.P("Once selected, this will populate a dropdown menu with model parameters that can be adjusted.", style={'line-height': '1.6'}),
-            #                     html.Hr(),
+                                # Step 1
+                                html.H4('1. Select a Parameter Group to Adjust', style={'color': '#0066cc', 'font-weight': 'bold'}),
+                                html.P("Each parameter option represents a catagory of decision variables:", style={'line-height': '1.6'}),
+                                html.Ul(children=[
+                                    html.Li("Pumping Rates: Pumping rates at each extraction well"),
+                                    html.Li("Stream and WTP Inflows: inflows from upstream and mid-stream inflows from a water treatment plant"),
+                                    html.Li("Antecedent Recharge: recharge in the steady state stress period (stress period 0)")
+                                ], style={'line-height': '1.6'}),
+                                html.P("Once selected, this will populate a dropdown menu with model parameters that can be adjusted.", style={'line-height': '1.6'}),
+                                html.Hr(),
                         
-            #                     # Step 2
-            #                     html.H4('2. Configure Emulator Inputs', style={'color': '#0066cc', 'font-weight': 'bold'}),
-            #                     # Choose a Decision Variable, Specify Desired Time-Period to Adjust, and Input a Multiplier to Apply to the Variable ACross the Specified Stress Periods
-            #                     html.P('Choose a decision parameter from the drowndown menu and a range of stress periods to adjust.',
-            #                            style={'line-height': '1.2'}),
-            #                     html.P("Enter any multiplier value to adjust the selected decision variable. For instance, entering '2' with 'All Wells' selected will double the pumping rate for all wells during the specifed stress periods.", 
-            #                            style={'line-height': '1.2'}),
-            #                     html.P("Click the 'save input' button to save the current parameter adjustment to the emulator scenario. You will see this input populate the table to the right.", 
-            #                            style={'line-height': '1.2'}),
-            #                     html.Ul(children=[
-            #                         html.Li("Any combination of pumping, SFR, and Recharge parameters can be specifed to create unique scenarios"),
-            #                         html.Li("An unlimited number of parameter inputs can be specifed and added to the scenario"),
-            #                         html.Li("To reset the scenario, click the 'Reset Inputs' button. This will remove all inputs to the current emulator scenario"),
-            #                         ],style={'line-height': '1.6'}
-            #                     ),
-            #                     html.Hr(),
+                                # Step 2
+                                html.H4('2. Configure Emulator Inputs', style={'color': '#0066cc', 'font-weight': 'bold'}),
+                                # Choose a Decision Variable, Specify Desired Time-Period to Adjust, and Input a Multiplier to Apply to the Variable ACross the Specified Stress Periods
+                                html.P('Choose a decision parameter from the drowndown menu and a range of stress periods to adjust.',
+                                       style={'line-height': '1.2'}),
+                                html.P("Enter any multiplier value to adjust the selected decision variable. For instance, entering '2' with 'All Wells' selected will double the pumping rate for all wells during the specifed stress periods.", 
+                                       style={'line-height': '1.2'}),
+                                html.P("Click the 'save input' button to save the current parameter adjustment to the emulator scenario. You will see this input populate the table to the right.", 
+                                       style={'line-height': '1.2'}),
+                                html.Ul(children=[
+                                    html.Li("Any combination of pumping, SFR, and Recharge parameters can be specifed to create unique scenarios"),
+                                    html.Li("An unlimited number of parameter inputs can be specifed and added to the scenario"),
+                                    html.Li("To reset the scenario, click the 'Reset Inputs' button. This will remove all inputs to the current emulator scenario"),
+                                    ],style={'line-height': '1.6'}
+                                ),
+                                html.Hr(),
                     
-            #                     # Step 3
-            #                     html.H4('3. Click "Run Emulator" to Produce Results', style={'color': '#0066cc', 'font-weight': 'bold'}),
-            #                     html.P("Once the emulator completes its analysis, navigate to the 'Results viewer' tab to view graphical results", style={'line-height': '1.6'}),
-            #                 ], style={
-            #                     'padding': '20px',
-            #                     'background-color': '#f9f9f9',
-            #                     'border': '1px solid #ddd',
-            #                     'border-radius': '8px',
-            #                     'box-shadow': '2px 2px 10px rgba(0,0,0,0.05)',
-            #                     'margin-top': '20px'
-            #                 }),
-            #             ], 
-            #             style={'width': '95%', 'margin': 'auto', 'padding': '20px', 'background-color': '#ffffff','margin-bottom':'100px'}
-            #         ),
-            #         ],
-            #         style={'fontSize': '120%'},
-            #         selected_style={'fontSize': '125%'},
-            #         ),
+                                # Step 3
+                                html.H4('3. Click "Run Emulator" to Produce Results', style={'color': '#0066cc', 'font-weight': 'bold'}),
+                                html.P("Once the emulator completes its analysis, navigate to the 'Results viewer' tab to view graphical results", style={'line-height': '1.6'}),
+                            ], style={
+                                'padding': '20px',
+                                'background-color': '#f9f9f9',
+                                'border': '1px solid #ddd',
+                                'border-radius': '8px',
+                                'box-shadow': '2px 2px 10px rgba(0,0,0,0.05)',
+                                'margin-top': '20px'
+                            }),
+                        ], 
+                        style={'width': '95%', 'margin': 'auto', 'padding': '20px', 'background-color': '#ffffff','margin-bottom':'100px'}
+                    ),
+                    ],
+                    style={'fontSize': '120%'},
+                    selected_style={'fontSize': '125%'},
+                    ),
             dcc.Tab(label='Model Emulator',
                     children=[
                         # Main content split between input section and graph
