@@ -26,7 +26,6 @@ forecast_results = pd.DataFrame()
 # Define the app
 app = Dash(__name__,
             external_stylesheets=[dbc.themes.BOOTSTRAP],
-            # assets_folder=resource_path('assets')
             )
 server = app.server  # --> This is for Docker
 
@@ -130,6 +129,7 @@ rm = pyemu.Matrix.from_binary(os.path.join(md,"master","response.jcb"))
 # Function to run the emulator with selected perturbations
 # --------------------------------------------------------
 def run_emulator(input_dict):
+    print(input_dict)
     # Grab a copy...
     forecast_df = pst.res.loc[:,["modelled"]].copy()
     
@@ -334,7 +334,7 @@ app.layout = html.Div([
 
                                 ),
                                 ],
-                                style={"height": "800px"},
+                                style={"height": "700px"},
                                 background=[0.788, 0.843, 0.969],
                             ),
                             ],
@@ -614,16 +614,17 @@ app.layout = html.Div([
                                         # Selector for response variable
                                         html.H5("Select Response Variable:"),
                                         html.Div([
-                                            dcc.RadioItems([{'label': 'Streamflow', 'value': 'gage'},
+                                            dcc.RadioItems([{'label': 'Simulated Heads (Contour)',
+                                                             'value': 'sim_hds'},
+                                                            {'label': 'Streamflow', 'value': 'gage'},
+                                                            # {'label': 'SFR Contour', 'value': 'SFR_contour'},
                                                             {'label': 'GW/SW Exchange: Upstream',
                                                              'value': 'headwater'},
                                                             {'label': 'GW/SW Exchange: Downstream',
                                                              'value': 'tailwater'},
                                                             {'label': 'Monitoring Well Heads (Time Series)', 'value': 'monitoring_well_hds'},
-                                                            {'label': 'Simulated Heads (Contour)',
-                                                             'value': 'sim_hds'},
                                                             {'label': 'Zone Budget', 'value': 'zone_bud'},],
-                                                           'gage',
+                                                           'sim_hds',
                                                            id='response_selector',
                                                            style={'width': '100%',
                                                                   'margin-bottom': '20px'}
@@ -1110,8 +1111,10 @@ def plot_emulator_results(switch,response,SP_slider,SP_slider_sanky,layer_slider
     else:
         # Assert the results as a global variable
         global forecast_results
- 
-        # Create figure based on user selected response variable
+        
+        # ------------------------------------------------------
+        # ---- Line plots: SFR stream, up/down stream conditions
+        # ------------------------------------------------------
         if response in ['gage','headwater','tailwater']:
             fig = make_subplots()
             
@@ -1162,7 +1165,9 @@ def plot_emulator_results(switch,response,SP_slider,SP_slider_sanky,layer_slider
             return fig,{'display':'block'},{'display':'none'},{'display':'none'}
         
         
-        # Zone Budget - sanky diagram
+        # --------------------------------
+        # ---- Zone Budget - sanky diagram
+        # --------------------------------
         elif response == 'zone_bud':
             
             # zonebud sanky diagram
@@ -1355,9 +1360,9 @@ def plot_emulator_results(switch,response,SP_slider,SP_slider_sanky,layer_slider
                                   font_size=14)
                 return fig,{'display':'none'},{'display':'none'},{'display':'block'}
             
-            # ------------------
-            # zonbud time-series
-            # ------------------
+            # -----------------------
+            # ---- zonbud time-series
+            # -----------------------
             elif zonbud_option == 'time_series':
                 zb_response = zonbud_dropdown
                 fig = make_subplots()
@@ -1409,9 +1414,9 @@ def plot_emulator_results(switch,response,SP_slider,SP_slider_sanky,layer_slider
                 fig.update_layout(yaxis=dict(tickformat=".1e"))
                 return fig,{'display':'none'},{'display':'none'},{'display':'block'}
             
-        # ---------------
-        # Simulated Heads
-        # ---------------
+        # ---------------------------
+        # ---- Simulated Head contour
+        # ---------------------------
         elif response == 'sim_hds':
             # Load gwf model for the cell center
             sim = flopy.mf6.MFSimulation.load(sim_ws=os.path.join(md,"master"), 
@@ -1581,6 +1586,7 @@ def plot_emulator_results(switch,response,SP_slider,SP_slider_sanky,layer_slider
             
             # Differnce: forecast - base
             c = b - a
+            c = np.where(abs(c)<0.01,0,c)
             fig.add_trace(go.Contour(z=c,
                                      x=x[0, :],
                                      y=y[:, 0],
@@ -1633,9 +1639,38 @@ def plot_emulator_results(switch,response,SP_slider,SP_slider_sanky,layer_slider
             fig.update_yaxes(scaleanchor='x', scaleratio=1)
             
             return fig,{'display':'none'},{'display':'block'},{'display':'none'}
-    
+        
+        
+        # ---------------------
+        # ---- SFR Contour plot
+        # ---------------------
+        # elif response == "SFR_contour":
+        #     fig = make_subplots()
+            
+        #     # Load SFR flows
+        #     fig = make_subplots()
+            
+        #     # Load the forecasted DataFrame for each specified multiplier
+        #     disturbed_forecast = forecast_results.copy()   
+                             
+        #     #disturbed_forecast = disturbed_forecast.set_index('name')
+        #     disturbed_forecast = disturbed_forecast.loc[obs.usecol=='sfr'].copy()
+        #     print(disturbed_forecast)
+        #     times = [float(i.split("time:")[-1]) for i in disturbed_forecast.index]
+        #     start_date = pd.Timestamp('2022-01-01')
+        #     dates = [start_date + timedelta(days=t) for t in times]
+        #     # Load perturbed SFR flows
+            
+        #     # Calc different for current sp
+            
+        #     # Show as a contour plot (in this case its a straight line)
+            
+            
+        #     return fig,{'display':'none'},{'display':'block'},{'display':'none'}
+        
+        
         # --------------------------
-        # Plot monitoring well heads
+        # ---- Monitoring well heads
         # --------------------------
         elif response == 'monitoring_well_hds':
             trgw = ['trgw-0-29-5', 'trgw-0-41-32', 'trgw-0-68-47', 
