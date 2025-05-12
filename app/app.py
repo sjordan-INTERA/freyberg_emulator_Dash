@@ -5,7 +5,6 @@ Dash application for Freyberg Model Emulator
 """
 from dash import Dash, dcc, html, Input, Output, State
 import numpy as np
-import flopy
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import dash_daq as dq
@@ -1412,13 +1411,8 @@ def plot_emulator_results(switch,response,SP_slider,SP_slider_sanky,layer_slider
         # ---- Simulated Head contour
         # ---------------------------
         elif response == 'sim_hds':
-            # Load gwf model for the cell center
-            sim = flopy.mf6.MFSimulation.load(sim_ws=os.path.join(md,"master"), 
-                                              verbosity_level=0,
-                                              load_only=['DIS','WEL'])
-            gwf = sim.get_model()
-            x = gwf.modelgrid.xcellcenters
-            y = gwf.modelgrid.ycellcenters
+            x = np.load(os.path.join(md,'master','x.npy'))
+            y = np.load(os.path.join(md,'master','y.npy'))
             # Model dis
             nrow = 120
             ncol = 60
@@ -1444,7 +1438,9 @@ def plot_emulator_results(switch,response,SP_slider,SP_slider_sanky,layer_slider
             # For pumping wells:
             wel_x = []
             wel_y = []
-            for well in gwf.wel.stress_period_data.get_data()[0]:
+            well_data = np.load(os.path.join(md,'master','well_data.npy'),
+                                allow_pickle=True)
+            for well in well_data:
                 wel_x.append(x[0,:][well[0][2]])
                 wel_y.append(y[:,0][well[0][1]])
                 
@@ -1634,35 +1630,7 @@ def plot_emulator_results(switch,response,SP_slider,SP_slider_sanky,layer_slider
             
             return fig,{'display':'none'},{'display':'block'},{'display':'none'}
         
-        
-        # ---------------------
-        # ---- SFR Contour plot
-        # ---------------------
-        # elif response == "SFR_contour":
-        #     fig = make_subplots()
-            
-        #     # Load SFR flows
-        #     fig = make_subplots()
-            
-        #     # Load the forecasted DataFrame for each specified multiplier
-        #     disturbed_forecast = forecast_results.copy()   
-                             
-        #     #disturbed_forecast = disturbed_forecast.set_index('name')
-        #     disturbed_forecast = disturbed_forecast.loc[obs.usecol=='sfr'].copy()
-        #     print(disturbed_forecast)
-        #     times = [float(i.split("time:")[-1]) for i in disturbed_forecast.index]
-        #     start_date = pd.Timestamp('2022-01-01')
-        #     dates = [start_date + timedelta(days=t) for t in times]
-        #     # Load perturbed SFR flows
-            
-        #     # Calc different for current sp
-            
-        #     # Show as a contour plot (in this case its a straight line)
-            
-            
-        #     return fig,{'display':'none'},{'display':'block'},{'display':'none'}
-        
-        
+    
         # --------------------------
         # ---- Monitoring well heads
         # --------------------------
@@ -1753,11 +1721,8 @@ def toggle_modal(click,is_open,response_var):
         click_coords = [click['points'][0]['x'],click['points'][0]['y']]
         
         # Load GW model and determine well locations
-        sim = flopy.mf6.MFSimulation.load(sim_ws=os.path.join(md,"master"), 
-                                          verbosity_level=0)
-        gwf = sim.get_model()
-        x = gwf.modelgrid.xcellcenters
-        y = gwf.modelgrid.ycellcenters
+        x = np.load(os.path.join(md,'master','x.npy'))
+        y = np.load(os.path.join(md,'master','y.npy'))
         well_plot = False
         
         # I believe these are monitoring wells...

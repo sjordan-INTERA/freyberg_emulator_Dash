@@ -6,7 +6,6 @@ dash-vtk
 dash-daq
 pyvista
 pyemu
-flopy
 geopandas
 shapely
 scipy
