@@ -79,7 +79,7 @@ def response_matrix_emulator(dv_pars,
     assert isinstance(dv_pars,pd.DataFrame)
     assert "parval1" in dv_pars.columns, "parval1 column not found in dv_pars"
 
-    par = pd.read_csv(os.path.join(md,"pars.csv"), index_col=0)
+    par = pd.read_csv(os.path.join(md,"..","pars.csv"), index_col=0)
     # check that all of dv_pars index values are in par
     assert set(dv_pars.index).issubset(par.index), "dv_pars index values not found in parameter data"
     
