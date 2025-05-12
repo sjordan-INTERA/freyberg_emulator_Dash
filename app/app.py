@@ -11,9 +11,9 @@ import dash_daq as dq
 import dash_bootstrap_components as dbc
 import pandas as pd
 from datetime import timedelta
-import dash_vtk
-from dash_vtk.utils import to_mesh_state
-import pyvista as pv
+# import dash_vtk
+# from dash_vtk.utils import to_mesh_state
+# import pyvista as pv
 import sys
 import os
 import pyemu
@@ -60,8 +60,7 @@ def response_matrix_emulator(dv_pars,
     assert isinstance(dv_pars,pd.DataFrame)
     assert "parval1" in dv_pars.columns, "parval1 column not found in dv_pars"
 
-    pst = pyemu.Pst(os.path.join(md,"freyberg.pst"))
-    par = pst.parameter_data
+    par = pd.read_csv("assets/pars.csv", index_col=0)
     # check that all of dv_pars index values are in par
     assert set(dv_pars.index).issubset(par.index), "dv_pars index values not found in parameter data"
     
@@ -76,6 +75,7 @@ def response_matrix_emulator(dv_pars,
         resp_mat = response_jcb
     else:
         raise ValueError("response_jcb must be a str or pyemu.Jco")
+        
     # keep only pars in dv_pars...and align
     assert set(dv_pars.index).issubset(resp_mat.col_names), f"dv_pars index values not found in {response_jcb} col_names"
     assert set(forecast_names).issubset(resp_mat.row_names), f"forecast names not found in {response_jcb} row_names"
@@ -83,6 +83,7 @@ def response_matrix_emulator(dv_pars,
     # keep only relevant rows and cols
     resp_mat = resp_mat.get(row_names=forecast_names,
                             col_names=dv_pars.index.tolist())
+    
     # align
     dv_pars = dv_pars.loc[resp_mat.col_names, :]
     forecast_df = forecast_df.loc[resp_mat.row_names, :]
@@ -133,7 +134,7 @@ def run_emulator(input_dict):
     # This will be the forecasted dataframe
     # We will 'disturb' by each mult-param combo
     forecast_df = forecast_df.loc[_df.obsnme.tolist(),:]
-    dv_pars = pst.parameter_data.loc[rm.col_names,:].copy()
+    dv_pars = dv_pars = pst.parameter_data.loc[rm.col_names,:].copy()
     dv_pars["parval1_org"] = dv_pars.parval1.copy() # keep a backup of the original values
     
     # Pumping rate inputs
@@ -186,8 +187,8 @@ def run_emulator(input_dict):
 # --------------------------------
 # Create Homepage Figure using vtk
 # --------------------------------
-scaled_mesh_botm = pv.read(os.path.join(md,'dis_formatted.vtk'))
-mesh_state_botm = to_mesh_state(scaled_mesh_botm,'botm')
+# scaled_mesh_botm = pv.read(os.path.join(md,'dis_formatted.vtk'))
+# mesh_state_botm = to_mesh_state(scaled_mesh_botm,'botm')
 
 
 # ----------------------------------------------------------------------- #
@@ -279,147 +280,147 @@ app.layout = html.Div([
                         ),
 
                         html.Br(),
-                        html.Div([
-                            html.H3('Model Grid', style={'text-align': 'center', 'color': '#333', 'font-weight': 'bold'}),
-                            # Options for the VTK figure
-                            html.Div([
-                                html.P('Change grid opacity:'),
-                                dcc.Dropdown(placeholder='Grid cell opacity',
-                                             id='vtk_opactiy_dd',
-                                             options=[x/10 for x in range(1,11)],
-                                             value=1,
-                                             clearable=False,
-                                             style={'margin-right': '10px', 'flex':'1','max-width': '200px'}
-                                ),
-                                dcc.Checklist(options=[{'label': 'Show grid-cell edges', 'value': 'edges'}],
-                                              id='edge-mode-checkbox',
-                                              value=[],
-                                ),
-                                dcc.Checklist(options=[{'label': 'Show model axes', 'value': 'axes'}],
-                                              id='axes-checkbox',
-                                              value=[],
-                                ),
-                                ],
-                                style={'display':'flex',
-                                       'flex-direction':'row',
-                                       'align-items': 'center',
-                                       'gap': '10px',
-                                       'background-color': '#f9f9f9',
-                                       'border': '1px solid #ddd',
-                                       'border-radius': '8px',
-                                       'box-shadow': '2px 2px 10px rgba(0,0,0,0.05)',
-                                       'padding': '10px',
-                                       }
-                            ),
-                            html.Hr(),
-                            dash_vtk.View([
-                                dash_vtk.GeometryRepresentation(
-                                    id='vtk-geometry-representation',
-                                    children=[
-                                        dash_vtk.Mesh(state=mesh_state_botm)
-                                    ],
-                                    colorMapPreset="erdc_rainbow_bright",  # Use a preset color map
-                                    # Set the color range for 'top' values
-                                    colorDataRange=[-0.20274, 42.1417],
-                                    property={"edgeVisibility": False,
-                                              "opacity": 1.0,
-                                              },
+                        # html.Div([
+                        #     html.H3('Model Grid', style={'text-align': 'center', 'color': '#333', 'font-weight': 'bold'}),
+                        #     # Options for the VTK figure
+                        #     html.Div([
+                        #         html.P('Change grid opacity:'),
+                        #         dcc.Dropdown(placeholder='Grid cell opacity',
+                        #                      id='vtk_opactiy_dd',
+                        #                      options=[x/10 for x in range(1,11)],
+                        #                      value=1,
+                        #                      clearable=False,
+                        #                      style={'margin-right': '10px', 'flex':'1','max-width': '200px'}
+                        #         ),
+                        #         dcc.Checklist(options=[{'label': 'Show grid-cell edges', 'value': 'edges'}],
+                        #                       id='edge-mode-checkbox',
+                        #                       value=[],
+                        #         ),
+                        #         dcc.Checklist(options=[{'label': 'Show model axes', 'value': 'axes'}],
+                        #                       id='axes-checkbox',
+                        #                       value=[],
+                        #         ),
+                        #         ],
+                        #         style={'display':'flex',
+                        #                'flex-direction':'row',
+                        #                'align-items': 'center',
+                        #                'gap': '10px',
+                        #                'background-color': '#f9f9f9',
+                        #                'border': '1px solid #ddd',
+                        #                'border-radius': '8px',
+                        #                'box-shadow': '2px 2px 10px rgba(0,0,0,0.05)',
+                        #                'padding': '10px',
+                        #                }
+                        #     ),
+                        #     html.Hr(),
+                        #     dash_vtk.View([
+                        #         dash_vtk.GeometryRepresentation(
+                        #             id='vtk-geometry-representation',
+                        #             children=[
+                        #                 dash_vtk.Mesh(state=mesh_state_botm)
+                        #             ],
+                        #             colorMapPreset="erdc_rainbow_bright",  # Use a preset color map
+                        #             # Set the color range for 'top' values
+                        #             colorDataRange=[-0.20274, 42.1417],
+                        #             property={"edgeVisibility": False,
+                        #                       "opacity": 1.0,
+                        #                       },
 
-                                ),
-                                ],
-                                style={"height": "700px"},
-                                background=[0.788, 0.843, 0.969],
-                            ),
-                            ],
-                            style={'padding': '20px',
-                                   'background-color': '#f9f9f9',
-                                   'border': '1px solid #ddd',
-                                   'border-radius': '8px',
-                                   'box-shadow': '2px 2px 10px rgba(0,0,0,0.05)',
-                                   'margin-top': '10px',
-                                   'margin-bottom':'300px',
-                                   'width':'95%',
-                                   'margin': 'auto'}
-                        ),
+                        #         ),
+                        #         ],
+                        #         style={"height": "700px"},
+                        #         background=[0.788, 0.843, 0.969],
+                        #     ),
+                        #     ],
+                        #     style={'padding': '20px',
+                        #            'background-color': '#f9f9f9',
+                        #            'border': '1px solid #ddd',
+                        #            'border-radius': '8px',
+                        #            'box-shadow': '2px 2px 10px rgba(0,0,0,0.05)',
+                        #            'margin-top': '10px',
+                        #            'margin-bottom':'300px',
+                        #            'width':'95%',
+                        #            'margin': 'auto'}
+                        # ),
                     ],
                     style={'fontSize': '120%'},
                     selected_style={'fontSize': '125%'},
             ),
-            dcc.Tab(label='Emulator Instructions',
-                    children=[
-                       html.Div([
-                            # Section: Steps to Generate Response Matrix
-                            # html.Div([
-                            #     html.H4('Steps to Generate the Freyberg Model Response Matrix using PEST', style={'text-align': 'center', 'color': '#333', 'font-weight': 'bold','text-decoration': 'underline'}),
-                            #     html.Br(),
-                            #     html.P(
-                            #         "Before running the Emulator, you must execute 'workflow.py'. Ensure the 'num_workers' parameter within this script is set to match your system's specifications (i.e., the number of available computing cores).",
-                            #         style={'line-height': '1.6', 'text-align': 'justify'}
-                            #     ),
-                            #     html.P(
-                            #         "This script will set up and run the Freyberg groundwater model, PstFrom, and pestpp-glm to generate a response matrix. Once this is done, the Dashboard will have access to the response matrix and all necessary output files in order to emulate the groundwater model.",
-                            #         style={'line-height': '1.6', 'text-align': 'justify'}
-                            #     ),
-                            # ], style={
-                            #     'padding': '20px',
-                            #     'background-color': '#f9f9f9',
-                            #     'border': '1px solid #ddd',
-                            #     'border-radius': '8px',
-                            #     'box-shadow': '2px 2px 10px rgba(0,0,0,0.05)',
-                            #     'margin-bottom': '20px'
-                            # }),
+            # dcc.Tab(label='Emulator Instructions',
+            #         children=[
+            #            html.Div([
+            #                 # Section: Steps to Generate Response Matrix
+            #                 # html.Div([
+            #                 #     html.H4('Steps to Generate the Freyberg Model Response Matrix using PEST', style={'text-align': 'center', 'color': '#333', 'font-weight': 'bold','text-decoration': 'underline'}),
+            #                 #     html.Br(),
+            #                 #     html.P(
+            #                 #         "Before running the Emulator, you must execute 'workflow.py'. Ensure the 'num_workers' parameter within this script is set to match your system's specifications (i.e., the number of available computing cores).",
+            #                 #         style={'line-height': '1.6', 'text-align': 'justify'}
+            #                 #     ),
+            #                 #     html.P(
+            #                 #         "This script will set up and run the Freyberg groundwater model, PstFrom, and pestpp-glm to generate a response matrix. Once this is done, the Dashboard will have access to the response matrix and all necessary output files in order to emulate the groundwater model.",
+            #                 #         style={'line-height': '1.6', 'text-align': 'justify'}
+            #                 #     ),
+            #                 # ], style={
+            #                 #     'padding': '20px',
+            #                 #     'background-color': '#f9f9f9',
+            #                 #     'border': '1px solid #ddd',
+            #                 #     'border-radius': '8px',
+            #                 #     'box-shadow': '2px 2px 10px rgba(0,0,0,0.05)',
+            #                 #     'margin-bottom': '20px'
+            #                 # }),
                         
-                            # Section: Using the Emulator
-                            html.Div([
-                                html.H4('Using the Emulator', style={'text-align': 'center', 'color': '#333', 'font-weight': 'bold','text-decoration': 'underline'}),
-                                html.Br(),
+            #                 # Section: Using the Emulator
+            #                 html.Div([
+            #                     html.H4('Using the Emulator', style={'text-align': 'center', 'color': '#333', 'font-weight': 'bold','text-decoration': 'underline'}),
+            #                     html.Br(),
                         
-                                # Step 1
-                                html.H4('1. Select a Parameter Group to Adjust', style={'color': '#0066cc', 'font-weight': 'bold'}),
-                                html.P("Each parameter option represents a catagory of decision variables:", style={'line-height': '1.6'}),
-                                html.Ul(children=[
-                                    html.Li("Pumping Rates: Pumping rates at each extraction well"),
-                                    html.Li("Stream and WTP Inflows: inflows from upstream and mid-stream inflows from a water treatment plant"),
-                                    html.Li("Antecedent Recharge: recharge in the steady state stress period (stress period 0)")
-                                ], style={'line-height': '1.6'}),
-                                html.P("Once selected, this will populate a dropdown menu with model parameters that can be adjusted.", style={'line-height': '1.6'}),
-                                html.Hr(),
+            #                     # Step 1
+            #                     html.H4('1. Select a Parameter Group to Adjust', style={'color': '#0066cc', 'font-weight': 'bold'}),
+            #                     html.P("Each parameter option represents a catagory of decision variables:", style={'line-height': '1.6'}),
+            #                     html.Ul(children=[
+            #                         html.Li("Pumping Rates: Pumping rates at each extraction well"),
+            #                         html.Li("Stream and WTP Inflows: inflows from upstream and mid-stream inflows from a water treatment plant"),
+            #                         html.Li("Antecedent Recharge: recharge in the steady state stress period (stress period 0)")
+            #                     ], style={'line-height': '1.6'}),
+            #                     html.P("Once selected, this will populate a dropdown menu with model parameters that can be adjusted.", style={'line-height': '1.6'}),
+            #                     html.Hr(),
                         
-                                # Step 2
-                                html.H4('2. Configure Emulator Inputs', style={'color': '#0066cc', 'font-weight': 'bold'}),
-                                # Choose a Decision Variable, Specify Desired Time-Period to Adjust, and Input a Multiplier to Apply to the Variable ACross the Specified Stress Periods
-                                html.P('Choose a decision parameter from the drowndown menu and a range of stress periods to adjust.',
-                                       style={'line-height': '1.2'}),
-                                html.P("Enter any multiplier value to adjust the selected decision variable. For instance, entering '2' with 'All Wells' selected will double the pumping rate for all wells during the specifed stress periods.", 
-                                       style={'line-height': '1.2'}),
-                                html.P("Click the 'save input' button to save the current parameter adjustment to the emulator scenario. You will see this input populate the table to the right.", 
-                                       style={'line-height': '1.2'}),
-                                html.Ul(children=[
-                                    html.Li("Any combination of pumping, SFR, and Recharge parameters can be specifed to create unique scenarios"),
-                                    html.Li("An unlimited number of parameter inputs can be specifed and added to the scenario"),
-                                    html.Li("To reset the scenario, click the 'Reset Inputs' button. This will remove all inputs to the current emulator scenario"),
-                                    ],style={'line-height': '1.6'}
-                                ),
-                                html.Hr(),
+            #                     # Step 2
+            #                     html.H4('2. Configure Emulator Inputs', style={'color': '#0066cc', 'font-weight': 'bold'}),
+            #                     # Choose a Decision Variable, Specify Desired Time-Period to Adjust, and Input a Multiplier to Apply to the Variable ACross the Specified Stress Periods
+            #                     html.P('Choose a decision parameter from the drowndown menu and a range of stress periods to adjust.',
+            #                            style={'line-height': '1.2'}),
+            #                     html.P("Enter any multiplier value to adjust the selected decision variable. For instance, entering '2' with 'All Wells' selected will double the pumping rate for all wells during the specifed stress periods.", 
+            #                            style={'line-height': '1.2'}),
+            #                     html.P("Click the 'save input' button to save the current parameter adjustment to the emulator scenario. You will see this input populate the table to the right.", 
+            #                            style={'line-height': '1.2'}),
+            #                     html.Ul(children=[
+            #                         html.Li("Any combination of pumping, SFR, and Recharge parameters can be specifed to create unique scenarios"),
+            #                         html.Li("An unlimited number of parameter inputs can be specifed and added to the scenario"),
+            #                         html.Li("To reset the scenario, click the 'Reset Inputs' button. This will remove all inputs to the current emulator scenario"),
+            #                         ],style={'line-height': '1.6'}
+            #                     ),
+            #                     html.Hr(),
                     
-                                # Step 3
-                                html.H4('3. Click "Run Emulator" to Produce Results', style={'color': '#0066cc', 'font-weight': 'bold'}),
-                                html.P("Once the emulator completes its analysis, navigate to the 'Results viewer' tab to view graphical results", style={'line-height': '1.6'}),
-                            ], style={
-                                'padding': '20px',
-                                'background-color': '#f9f9f9',
-                                'border': '1px solid #ddd',
-                                'border-radius': '8px',
-                                'box-shadow': '2px 2px 10px rgba(0,0,0,0.05)',
-                                'margin-top': '20px'
-                            }),
-                        ], 
-                        style={'width': '95%', 'margin': 'auto', 'padding': '20px', 'background-color': '#ffffff','margin-bottom':'100px'}
-                    ),
-                    ],
-                    style={'fontSize': '120%'},
-                    selected_style={'fontSize': '125%'},
-                    ),
+            #                     # Step 3
+            #                     html.H4('3. Click "Run Emulator" to Produce Results', style={'color': '#0066cc', 'font-weight': 'bold'}),
+            #                     html.P("Once the emulator completes its analysis, navigate to the 'Results viewer' tab to view graphical results", style={'line-height': '1.6'}),
+            #                 ], style={
+            #                     'padding': '20px',
+            #                     'background-color': '#f9f9f9',
+            #                     'border': '1px solid #ddd',
+            #                     'border-radius': '8px',
+            #                     'box-shadow': '2px 2px 10px rgba(0,0,0,0.05)',
+            #                     'margin-top': '20px'
+            #                 }),
+            #             ], 
+            #             style={'width': '95%', 'margin': 'auto', 'padding': '20px', 'background-color': '#ffffff','margin-bottom':'100px'}
+            #         ),
+            #         ],
+            #         style={'fontSize': '120%'},
+            #         selected_style={'fontSize': '125%'},
+            #         ),
             dcc.Tab(label='Model Emulator',
                     children=[
                         # Main content split between input section and graph
@@ -1417,7 +1418,7 @@ def plot_emulator_results(switch,response,SP_slider,SP_slider_sanky,layer_slider
             nrow = 120
             ncol = 60
             # heads in all cells in layer 0 at the end of the simulation
-            _df = obs.loc[obs.obgnme==f"hds_layer{layer_slider}_kper{SP_slider}",:].copy()
+            _df = obs.loc[obs.obgnme==f"hds_layer{layer_slider}_kper{SP_slider}",['i','j']].copy()
             _df["i"]=_df["i"].astype(int)
             _df["j"]=_df["j"].astype(int)
             _df = _df.sort_values(by=["i","j"])
@@ -1461,9 +1462,8 @@ def plot_emulator_results(switch,response,SP_slider,SP_slider_sanky,layer_slider
                        disturbed_forecast.forecast.max())
 
             # Base Case
-            a = disturbed_forecast.modelled.values.reshape((nrow,ncol))
             # Plot head contour
-            fig.add_trace(go.Contour(z=a,
+            fig.add_trace(go.Contour(z=disturbed_forecast.modelled.values.reshape((nrow,ncol)),
                                      x=x[0, :],
                                      y=y[:, 0],
                                      colorscale='viridis',
@@ -1479,23 +1479,23 @@ def plot_emulator_results(switch,response,SP_slider,SP_slider_sanky,layer_slider
                           col=1)
             
             # Plot the SFR stream, in this case it is all of column 47
-            s = np.full(a.shape, np.nan)
-            s[:,46] = 10
-            s[:,47] = 10
-            s[:,48] = 10
-            custom_color = [[0, 'blue'], [1, 'blue']]
-            fig.add_trace(go.Contour(z=s,
-                                     x=x[0, :],
-                                     y=y[:, 0],
-                                     colorscale=custom_color,
-                                     name='SFR Stream',
-                                     colorbar=dict(
-                                                tickvals=[],  # Hide ticks
-                                                ticktext=[]   # Hide tick text
-                                            ),
-                                     ),
-                          row=1,
-                          col=1)
+            # s = np.full(a.shape, np.nan)
+            # s[:,46] = 10
+            # s[:,47] = 10
+            # s[:,48] = 10
+            # custom_color = [[0, 'blue'], [1, 'blue']]
+            # fig.add_trace(go.Contour(z=s,
+            #                          x=x[0, :],
+            #                          y=y[:, 0],
+            #                          colorscale=custom_color,
+            #                          name='SFR Stream',
+            #                          colorbar=dict(
+            #                                     tickvals=[],  # Hide ticks
+            #                                     ticktext=[]   # Hide tick text
+            #                                 ),
+            #                          ),
+            #               row=1,
+            #               col=1)
             
             # Plot pumping well locations
             fig.add_trace(go.Scatter(x=wel_x,
@@ -1527,8 +1527,7 @@ def plot_emulator_results(switch,response,SP_slider,SP_slider_sanky,layer_slider
                           )
             
             # Forecasted Case
-            b = disturbed_forecast.forecast.values.reshape((nrow,ncol))
-            fig.add_trace(go.Contour(z=b,
+            fig.add_trace(go.Contour(z=disturbed_forecast.forecast.values.reshape((nrow,ncol)),
                                      x=x[0, :],
                                      y=y[:, 0],
                                      colorscale='viridis',
@@ -1559,7 +1558,7 @@ def plot_emulator_results(switch,response,SP_slider,SP_slider_sanky,layer_slider
                           row=1,
                           col=2
                           )
-            # Plot monitroing well locations
+            # Plot monitoring well locations
             fig.add_trace(go.Scatter(x=wel_m_x,
                                      y=wel_m_y,
                                      mode='markers',
@@ -1575,7 +1574,7 @@ def plot_emulator_results(switch,response,SP_slider,SP_slider_sanky,layer_slider
                           )
             
             # Differnce: forecast - base
-            c = b - a
+            c = disturbed_forecast.forecast.values.reshape((nrow,ncol)) - disturbed_forecast.modelled.values.reshape((nrow,ncol))
             c = np.where(abs(c)<0.01,0,c)
             fig.add_trace(go.Contour(z=c,
                                      x=x[0, :],

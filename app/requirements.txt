@@ -2,9 +2,7 @@ dash
 plotly
 pandas
 dash-bootstrap-components
-dash-vtk
 dash-daq
-pyvista
 pyemu
 geopandas
 shapely
